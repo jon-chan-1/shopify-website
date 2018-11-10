@@ -1,0 +1,212 @@
+<hr>
+<div id="collection-rows--{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="collection-row-section">
+{% assign featured_row = section.settings.home_featured_row %}
+{% assign row_limit_setting = section.settings.grid %}
+{% case section.settings.grid %}
+  {% when 2 %}
+    {%- assign grid_item_width = 'medium--one-half large--one-half' -%}
+    {%- assign image_size = '540x' -%}
+    {% assign width = '540' %}
+    {% assign height = '600' %}
+  {% when 3 %}
+    {%- assign grid_item_width = 'small--one-half medium--one-third large--one-third' -%}
+     {%- assign image_size = '345x' -%}
+     {% assign width = '345' %}
+    {% assign height = '550' %}
+  {% when 4 %}
+    {%- assign grid_item_width = 'small--one-half medium--one-quarter large--one-quarter' -%}
+    {%- assign image_size = '250x' -%}
+    {% assign width = '250' %}
+    {% assign height = '225' %}
+  {% when 5 %}
+    {%- assign grid_item_width = 'small--one-half medium--one-fifth large--one-fifth' -%}
+    {%- assign image_size = '195x' -%}
+    {% assign width = '195' %}
+    {% assign height = '175' %}
+{% endcase %}
+
+{%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+{% assign header_title = collections[featured_row].title %}
+{%- assign more_link = collections[featured_row].url -%}
+
+{% if collections[featured_row].all_products_count != 0 and section.settings.home_featured_row != blank %}
+
+  {% if section.settings.title != blank %}
+    <div class="section-header">
+      <p class="h1{% if more_link %} section-header--left{% endif %}">{{ section.settings.title | escape }}</p>
+      {% if more_link %}
+        <div class="section-header--right">
+          {% assign header_title = header_title | downcase %}
+          <a href="{{ more_link }}">{{ 'homepage.featured_collection_rows.more_in_collection' | t: collection_title: header_title }} &rsaquo;</a>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="grid-uniform row-negative-bottom">
+    {% for product in collections[featured_row].products limit: product_limit %}
+      {% assign current_collection = collections[featured_row] %}
+        {% include 'product-grid-item' %}
+    {% endfor %}
+  </div>
+
+{% else %}
+  <div class="section-header">
+    <p class="h1 section-header--left">{{ section.settings.title | escape }}</p>
+    <div class="section-header--right">
+      <a href="{{ collections[featured_row].url }}">{{ 'homepage.featured_collection_rows.more' | t }} &rsaquo;</a>
+    </div>
+  </div>
+
+  <div class="grid text-center row-negative-bottom">
+    <div class="grid-item">
+      <div class="grid-uniform">
+        {% for i in (1..product_limit) %}
+          <div class="grid-item {{ grid_item_width }} text-center">
+            {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+              {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+            <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a> $19.99</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+</div>
+
+
+{% schema %}
+{
+  "name": {
+    "de": "Featured Kategorie",
+    "en": "Featured collection",
+    "es": "Colección destacada",
+    "fr": "Collection en vedette",
+    "it": "Collezione in evidenza",
+    "ja": "特集コレクション",
+    "pt-BR": "Coleção em destaque"
+  },
+  "class": "clearfix",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "Titre",
+        "it": "Heading",
+        "ja": "見出し",
+        "pt-BR": "Título"
+      },
+      "default": {
+        "de": "Featured Kategorie",
+        "en": "Featured collection",
+        "es": "Colección destacada",
+        "fr": "Collection en vedette",
+        "it": "Collezione in evidenza",
+        "ja": "特集コレクション",
+        "pt-BR": "Coleção em destaque"
+      }
+    },
+    {
+      "type": "collection",
+      "id": "home_featured_row",
+      "label": {
+        "de": "Kategorie",
+        "en": "Collection",
+        "es": "Colección",
+        "fr": "Collection",
+        "it": "Collezione",
+        "ja": "コレクション",
+        "pt-BR": "Coleção"
+      }
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": {
+        "de": "Produkte per Reihe",
+        "en": "Products per row",
+        "es": "Productos por fila",
+        "fr": "Produits par rangée",
+        "it": "Prodotti per riga",
+        "ja": "行あたりの商品数",
+        "pt-BR": "Produtos por linha"
+      },
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "label": {
+        "de": "Reihen",
+        "en": "Rows",
+        "es": "Filas",
+        "fr": "Rangées",
+        "it": "Righe",
+        "ja": "行",
+        "pt-BR": "Linhas"
+      },
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "product_show_saved_amount",
+      "label": {
+        "de": "Gesparten Betrag anzeigen",
+        "en": "Show saved amount",
+        "es": "Mostrar monto ahorrado",
+        "fr": "Afficher le montant économisé",
+        "it": "Mostra importo risparmiato",
+        "ja": "保存された金額を表示",
+        "pt-BR": "Exibir valor salvo"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "product_show_compare_at_price",
+      "label": {
+        "de": "Vergleich zum Preis anzeigen",
+        "en": "Show compare at price",
+        "es": "Mostrar precio de comparación",
+        "fr": "Afficher le prix normal",
+        "it": "Mostra Confronta al prezzo",
+        "ja": "価格比較を表示する",
+        "pt-BR": "Exibir comparação de preço"
+      },
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "de": "Featured Kategorie",
+        "en": "Featured collection",
+        "es": "Colección destacada",
+        "fr": "Collection en vedette",
+        "it": "Collezione in evidenza",
+        "ja": "特集コレクション",
+        "pt-BR": "Coleção em destaque"
+      },
+      "category": {
+        "de": "Sammlungen",
+        "en": "Collections",
+        "es": "Colecciones",
+        "fr": "Collections",
+        "it": "Collezioni",
+        "ja": "コレクション",
+        "pt-BR": "Coleções"
+      }
+    }
+  ]
+}
+{% endschema %}
