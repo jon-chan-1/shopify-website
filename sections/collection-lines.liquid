@@ -1,0 +1,319 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      {% include 'breadcrumb' %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h1 class="collection-title">
+        {{ collection.title }}
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="sidebar-filter active">
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="col-12">
+          <div class="float-right">
+            {% include 'collection-sorting' %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="product-grid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-data" style="visibility: hidden;display: none;">
+  <table>
+    <tr>
+      <th>link</th>
+      <th>image</th>
+      <th>title</th>
+      <th>compare_at_price</th>
+      <th>price</th>
+      <th>product_line</th>
+      <th>id</th>
+    </tr>
+    {%- paginate collection.products by 50 -%}
+      {%- for product in collection.products -%}
+        <tr>
+          <td>{{ product.url | within: current_collection }}</td>
+          <td>{{ product | img_url: '500x500' }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.compare_at_price | money}}</td>
+          <td>{{ product.price_min | money }} - {{ product.price_max | money }}</td>
+          <td>{{ product.vendor }}</td>
+          <td>{{ product.id }}</td>
+        </tr>
+      {%- endfor -%}
+    <tr><th>paginate_url</th><td id="paginate-url">{{ paginate.next.url }}</td></tr>
+    {%- endpaginate -%}
+  </table>
+  <table class="hidden-tags">
+    <tr>
+      <th>tag</th>
+      <th>link</th>
+      <th>active</th>
+    </tr>
+    {% capture base_url %}{{ shop.url}}{{ collection.url }}{% endcapture %}
+    {% if base_url == canonical_url %}
+      {% for tag in collection.all_tags %}
+        <tr>
+          <td>{{ tag }}</td>
+          <td>{{ tag | link_to_add_tag: tag }}</td>
+          <td>false</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      {% for tag in collection.tags %}
+        <tr>
+        {% if current_tags contains tag %}
+          <td>{{ tag }}</td>
+          <td>{{ tag | link_to_remove_tag: tag }}</td>
+          <td>true</td>
+        {% else %}
+          <td>{{ tag }}</td>
+          <td>{{ tag | link_to_add_tag: tag }}</td>
+          <td>false</td>
+        {% endif %}
+        </tr>
+      {% endfor %}
+    {% endif %}
+  </table>
+</div>
+
+{% schema %}
+  {
+    "name": "collection-lines",
+    "settings": [],
+	"class": "collection-lines-section"
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+.collection-title {
+  text-align: center;
+}
+
+.sort-by-filter {
+  text-align: right;
+  padding-right: 50px;
+}
+
+.product-line {
+  flex-direction: row;
+  align-items: center;
+}
+
+.product-line > h4 {
+  flex-grow: 0;
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #000000;
+}
+
+.product-tile {
+  stroke: #000000;
+  stroke-width: 1px;
+}
+.active-link {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+$(document).ready(function(){
+  var filterTable = $(".product-data .hidden-tags tbody")[0].children;
+  var filters = filterArray(filterTable);
+  buildFilters(filters);
+
+  var productTable = $(".product-data table tbody")[0].children;
+  var productLines = productArray(productTable);
+
+  loopProductLines(productLines);
+});
+
+function productArray(table) {
+  var i;
+  var hash = {};
+
+  for (i = 1; i < table.length-1; i++) {
+    var row = table[i].children;
+    var url = row[0].innerHTML;
+    var image_url = row[1].innerHTML;
+    var title = row[2].innerHTML;
+    var sale_price = row[3].innerHTML;
+    var price = row[4].innerHTML;
+    var line = row[5].innerHTML;
+    var id = row[6].innerHTML;
+
+    if (!hash[line]) hash[line] = new Array;
+    hash[line].push({
+      url: url,
+      image_url: image_url,
+      title: title,
+      sale_price: sale_price,
+      price: price,
+      id: id
+    });
+  };
+
+  var array = [];
+  for (var key in hash) {
+    array.push({ [key]: hash[key] })
+  };
+
+  return array;
+};
+
+function filterArray(table) {
+  var i;
+  var hash = {};
+
+  for (i = 1; i < table.length; i++) {
+    var row = table[i].children;
+    var tag = row[0].innerHTML;
+    var link = row[1].innerHTML;
+    var hrefIndex = link.indexOf("href=");
+    var href = link.slice(hrefIndex, link.indexOf("\"", hrefIndex + 8) + 1);
+    var active = row[2].innerHTML;
+    var split = tag.split("|");
+
+    if (split.length > 1) {
+      if (!hash[split[0]]) hash[split[0]] = new Array;
+      hash[split[0]].push({
+        tag: split[1],
+        href: href,
+        active: active
+      });
+    };
+  };
+
+  return hash;
+};
+
+function buildFilters(filters) {
+  var sidebar = $('.sidebar-filter')[0];
+  for (var filterGroup in filters) {
+    var div = $("<div>" + filterGroup + "</div>").appendTo(sidebar);
+
+    var options = filters[filterGroup];
+    for (var index in options) {
+      var filter = options[index];
+      var isActive = filter.active == "true" ? "active-link" : "inactive-link";
+      $('</br><a ' + filter.href + ' class="' + isActive + '">' + filter.tag + '</a>').appendTo(div);
+    };
+  };
+}
+
+function loopProductLines(productLines) {
+  for (var productLineIndex in productLines) {
+    var line = productLines[productLineIndex];
+    loopProductLine(line);
+  };
+};
+
+function loopProductLine(line) {
+  for (var title in line) {
+    var productLine = line[title];
+
+    buildLineTitle(title);
+    var count = productLine.length;
+    buildRows(count);
+
+    var productIndex = 0;
+
+    for (var product in productLine) {
+      buildProductTile(productLine[product], calculateRow(productIndex), calculateColumn(productIndex));
+      productIndex += 1;
+    };
+  };
+};
+
+function buildLineTitle(title) {
+  var productGrid = $('#product-grid');
+
+  $('<div class="product-line d-flex"><h4>' + title + '</h4><div class="divider-line"</div></div>').appendTo(productGrid);
+};
+
+function buildProductTile(product, row, col) {
+
+  return
+
+  var xPosition = col * boxWidth();
+  var yPosition = (row * boxWidth()) + ((row + 2) * Number(getLastNodeSize("text").height));
+
+  var a = g.append("a")
+    .attr("xlink:href", product.url)
+  a.append("rect")
+    .attr("class", "product-tile")
+    .attr("width", boxWidth())
+    .attr("height", boxWidth())
+    .style("fill", "none")
+    .attr("x", xPosition)
+    .attr("y", yPosition);
+  a.append("svg:image")
+    .attr("width", boxWidth())
+    .attr("height", boxWidth())
+    .attr("x", xPosition)
+    .attr("y", yPosition)
+    .attr("xlink:href", product.image_url);
+  a.append("text")
+    .attr("x", xPosition)
+    .attr("y", yPosition + boxWidth() - 30)
+    .text(product.title)
+  a.append("text")
+    .attr("x", xPosition)
+    .attr("y", yPosition + boxWidth() - 15)
+    .text(product.price)
+
+  return;
+};
+
+function calculateRow(productCount) {
+  return Number(Math.floor(productCount*1.0/4));
+};
+
+function calculateColumn(productCount) {
+  return Number(productCount % 4);
+};
+
+function svgWidth() {
+  return $(".product-grid-svg").width() - svgPaddingRight;
+};
+
+function boxWidth() {
+  return svgWidth()/4;
+}
+
+d3.selection.prototype.first = function() { return d3.select(this.nodes()[0]) };
+d3.selection.prototype.last = function() { return d3.select(this.nodes()[this.size() - 1]) };
+
+function setSVGHeight(){
+  d3.select(".product-grid-svg").attr("height", getLastNodeSize("rect").bottom);
+  return;
+};
+
+function getLastNodeSize(node) {
+  var self = d3.selectAll(node).last().node();
+  return self.getBoundingClientRect();
+};
+
+{% endjavascript %}
