@@ -1,0 +1,115 @@
+<nav class="navbar red" id="top-nav">
+  <a href="/" id="home-link" class="mr-auto">
+    <img src="{{ 'crown-logo.png' | asset_img_url: 'master' }}" alt="logo" id="logo">
+    <img src="{{ 'crown-speedlab-text-logo.png' | asset_img_url: 'master' }}" alt="logo words" id="text-logo">
+  </a>
+  <form id="search-icon" action="/search" method="get" role="search">
+    <input type="hidden" name="type" value="product">
+    <input type="search" name="q" aria-label="Search" id="search-form" style="background:url({{ 'search.png' | asset_img_url: 'master' }}) no-repeat center;-webkit-transition: all .5s;-moz-transition: all .5s;transition: all .5s;width:24px;border:none;">
+  </form>
+  <a href="/cart" class="cart-toggle">
+    <img src="{{ 'icon.png' | asset_img_url: 'master' }}" alt="shopping cart icon" id="cart">
+  </a>
+  <img src="{{ 'user-line.png' | asset_img_url: 'master' }}" alt="account icon" id="account">
+  <img src="{{ 'dropdown.png' | asset_img_url: 'master' }}" alt="dropdown arrow icon" id="dropdown">
+  <a href="/pages/contact-us" id="contact-us">VISIT OUR STORE</a>
+  <span id="phone">(718) 539-6127</span>
+</nav>
+
+{% schema %}
+{
+  "name": "Top Header",
+  "class": "top-header",
+  "settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+
+#top-nav {
+  height: 60px;
+  padding: 0px;
+  background: #b90b00;
+}
+
+#contact-us {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+#phone {
+  color: #ffffff;
+}
+
+#search-form {
+  background: #ffffff;
+}
+
+#home-link:hover {
+  text-decoration: none;
+}
+
+form {
+  margin: 0px;
+}
+
+form > button {
+  background: none;
+  border: none;
+}
+
+input[type="search"] {
+  margin: 0px;
+}
+
+input {
+  padding: 0px;
+}
+
+#search-form {
+  cursor: pointer;
+}
+
+#search-form:focus{
+	width: 150px!important;
+  background: #fff!important;
+	padding-left: 10px;
+	color: #000;
+	cursor: auto;
+}
+
+@media (min-width: 992px) {
+  #home-link {
+    margin-left: 96px;
+  }
+
+  #text-logo {
+    padding-left: 26px;
+  }
+
+  #phone {
+    padding-right: 106px;
+  }
+
+  #contact-us {
+    padding-right: 22px;
+  }
+
+  #dropdown {
+    padding-right: 21px;
+  }
+
+  #cart {
+    padding-right: 12px;
+  }
+
+  #search-icon {
+    padding-right: 14px;
+  }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+
+{% endjavascript %}
