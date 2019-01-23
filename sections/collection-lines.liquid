@@ -34,7 +34,7 @@
         <div class="col-12">
           <div id="paginate">
             {%- paginate collection.products by 50 -%}
-              {{ paginate | default_pagination }}
+              {% include 'pagination-custom' %}
             {%- endpaginate -%}
           </div>
         </div>
@@ -112,6 +112,10 @@
 {% stylesheet %}
 
 .collection-title {
+  text-align: center;
+}
+
+#paginate {
   text-align: center;
 }
 
