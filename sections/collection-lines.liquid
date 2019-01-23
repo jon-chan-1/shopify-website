@@ -30,6 +30,15 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="paginate">
+            {%- paginate collection.products by 50 -%}
+              {{ paginate | default_pagination }}
+            {%- endpaginate -%}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -52,12 +61,11 @@
           <td>{{ product | img_url: '500x500' }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.compare_at_price | money}}</td>
-          <td>{{ product.price_min | money }} - {{ product.price_max | money }}</td>
+          <td>From {{ product.price_min | money }}</td>
           <td>{{ product.vendor }}</td>
           <td>{{ product.id }}</td>
         </tr>
       {%- endfor -%}
-    <tr><th>paginate_url</th><td id="paginate-url">{{ paginate.next.url }}</td></tr>
     {%- endpaginate -%}
   </table>
   <table class="hidden-tags">
@@ -66,7 +74,7 @@
       <th>link</th>
       <th>active</th>
     </tr>
-    {% capture base_url %}{{ shop.url}}{{ collection.url }}{% endcapture %}
+    {% capture base_url %}{{ shop.url }}{{ collection.url }}{% endcapture %}
     {% if base_url == canonical_url %}
       {% for tag in collection.all_tags %}
         <tr>
@@ -236,12 +244,12 @@ function loopProductLine(line) {
 
     buildLineTitle(title);
     var count = productLine.length;
-    buildRows(count);
+    buildRows(count, title);
 
     var productIndex = 0;
 
     for (var product in productLine) {
-      buildProductTile(productLine[product], calculateRow(productIndex), calculateColumn(productIndex));
+      buildProductTile(productLine[product], formatLine(title) + "-" + productIndex);
       productIndex += 1;
     };
   };
@@ -253,67 +261,52 @@ function buildLineTitle(title) {
   $('<div class="product-line d-flex"><h4>' + title + '</h4><div class="divider-line"</div></div>').appendTo(productGrid);
 };
 
-function buildProductTile(product, row, col) {
+function buildRows(count, line) {
+  var rowsCount = Math.ceil(count/4);
+  var productCount = 0;
+  var productGrid = $('#product-grid');
+  for (var i=0; i < rowsCount; i++) {
+    $(newRow(i, line)).appendTo(productGrid);
+  };
+};
+
+function newRow(n, line) {
+  var row = '<div class="row">'
+  for (var i = 0; i < 4; i++) {
+    row += newTile(formatLine(line) + "-" + (n*4 + i))
+  };
+
+  return row + '</div>'
+};
+
+function formatLine(line) {
+  return line.replace(/ /g, "");
+};
+
+function newTile(id) {
+  return '<div class="col-md-3"><div id="' + id + '"></div></div>'
+};
+
+function buildProductTile(product, id) {
+  var productDiv = $("#"+id);
+  $(newCard(product)).appendTo(productDiv);
 
   return
-
-  var xPosition = col * boxWidth();
-  var yPosition = (row * boxWidth()) + ((row + 2) * Number(getLastNodeSize("text").height));
-
-  var a = g.append("a")
-    .attr("xlink:href", product.url)
-  a.append("rect")
-    .attr("class", "product-tile")
-    .attr("width", boxWidth())
-    .attr("height", boxWidth())
-    .style("fill", "none")
-    .attr("x", xPosition)
-    .attr("y", yPosition);
-  a.append("svg:image")
-    .attr("width", boxWidth())
-    .attr("height", boxWidth())
-    .attr("x", xPosition)
-    .attr("y", yPosition)
-    .attr("xlink:href", product.image_url);
-  a.append("text")
-    .attr("x", xPosition)
-    .attr("y", yPosition + boxWidth() - 30)
-    .text(product.title)
-  a.append("text")
-    .attr("x", xPosition)
-    .attr("y", yPosition + boxWidth() - 15)
-    .text(product.price)
-
-  return;
 };
 
-function calculateRow(productCount) {
-  return Number(Math.floor(productCount*1.0/4));
-};
-
-function calculateColumn(productCount) {
-  return Number(productCount % 4);
-};
-
-function svgWidth() {
-  return $(".product-grid-svg").width() - svgPaddingRight;
-};
-
-function boxWidth() {
-  return svgWidth()/4;
-}
-
-d3.selection.prototype.first = function() { return d3.select(this.nodes()[0]) };
-d3.selection.prototype.last = function() { return d3.select(this.nodes()[this.size() - 1]) };
-
-function setSVGHeight(){
-  d3.select(".product-grid-svg").attr("height", getLastNodeSize("rect").bottom);
-  return;
-};
-
-function getLastNodeSize(node) {
-  var self = d3.selectAll(node).last().node();
-  return self.getBoundingClientRect();
+function newCard(product) {
+  var card = `
+    <div class="card product">
+      <a href="` + product.url + `">
+        <img class="card-img-top img-fluid" src="` + product.image_url + `" alt="Card image cap">
+      </a>
+      <div class="card-body">
+        <p class="card-text">` + product.title + `</p>
+        <p class="card-text">` + product.price + `</p>
+      </div>
+    </div>
+  `;
+  return card;
 };
 
 {% endjavascript %}

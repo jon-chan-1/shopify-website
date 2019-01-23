@@ -1,0 +1,61 @@
+/*==============================================================================
+  #Custom CSS
+==============================================================================*/
+@media (min-width: 992px) {
+  .container {
+    max-width: 100%;
+    padding-left: 96px;
+    padding-right: 96px;
+    margin: 0px;
+  }
+}
+
+.breadcrumb {
+  border-bottom: none;
+}
+
+.main-content {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.wrapper {
+  padding: 0px;
+  max-width: none;
+  margin: 0px;
+}
+
+.homepage-header {
+  text-align: center;
+  padding-top: 98px;
+  padding-bottom: 58px;
+  font-family: muli;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1.7px;
+  color: #b90b00;
+}
+
+.card.product > a > img {
+  border: 1px solid #c2d1d9;
+}
+
+.card.product {
+  height: 240px;
+  width: 240px;
+}
+
+.card {
+  border: none;
+}
+
+.card-text {
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #505d68;
+}
