@@ -1,0 +1,29 @@
+{% unless template.name == 'index' or template.name == 'cart' %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      {% if template.name == 'product' %}
+        {% if collection and collection.handle %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          <li class="breadcrumb-item"><a href="{{ url }}">{{ collection.title }}</a></li>
+        {% endif %}
+        <li class="breadcrumb-item">{{ product.title }}</li>
+      {% elsif template.name == 'collection' %}
+        {% if current_tags %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          <li class="breadcrumb-item"><a href="{{ url }}">{{ collection.title }}</a></li>
+          <li class="breadcrumb-item">
+            {% for tag in current_tags %}
+              {{ tag }}
+              {% unless forloop.last %}
+                +
+              {% endunless %}
+            {% endfor %}
+          </li>
+        {% else %}
+          <li class="breadcrumb-item">{{ collection.title }}</li>
+        {% endif %}
+      {% endif %}
+    </ol>
+  </nav>
+{% endunless %}

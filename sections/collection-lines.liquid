@@ -1,7 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      {% include 'breadcrumb' %}
     </div>
   </div>
   <div class="row">
@@ -57,7 +56,7 @@
     {%- paginate collection.products by 50 -%}
       {%- for product in collection.products -%}
         <tr>
-          <td>{{ product.url | within: current_collection }}</td>
+          <td>{{ product.url | within: collection }}</td>
           <td>{{ product | img_url: '500x500' }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.compare_at_price | money}}</td>
@@ -137,6 +136,7 @@
   flex-grow: 1;
   height: 1px;
   background-color: #000000;
+  margin-left: 20px;
 }
 
 .product-tile {
