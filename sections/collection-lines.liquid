@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+      {% include 'breadcrumb' %}
     </div>
   </div>
   <div class="row">
@@ -123,20 +124,8 @@
   padding-right: 50px;
 }
 
-.product-line {
-  flex-direction: row;
-  align-items: center;
-}
-
 .product-line > h4 {
   flex-grow: 0;
-}
-
-.divider-line {
-  flex-grow: 1;
-  height: 1px;
-  background-color: #000000;
-  margin-left: 20px;
 }
 
 .product-tile {
@@ -262,7 +251,7 @@ function loopProductLine(line) {
 function buildLineTitle(title) {
   var productGrid = $('#product-grid');
 
-  $('<div class="product-line d-flex"><h4>' + title + '</h4><div class="divider-line"</div></div>').appendTo(productGrid);
+  $('<div class="product-line d-flex"><h4>' + title + '</h4><div class="divider-line"></div></div>').appendTo(productGrid);
 };
 
 function buildRows(count, line) {

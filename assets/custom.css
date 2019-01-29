@@ -73,3 +73,15 @@
 ol {
   margin-left: 0px;
 }
+
+.divider-line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #b90b00;
+  margin-left: 20px;
+}
+
+.product-line {
+  flex-direction: row;
+  align-items: center;
+}
