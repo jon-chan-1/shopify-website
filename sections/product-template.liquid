@@ -61,7 +61,7 @@
 
       </div>
       <div class="col-6">
-        <h1 class="h2" itemprop="name">{{ product.title }}</h1>
+        <h1 class="product-title" itemprop="name">{{ product.title }}</h1>
 
         {% if section.settings.product_vendor_enable %}
           <p class="product-meta" itemprop="brand">{{ product.vendor }}</p>
@@ -76,19 +76,10 @@
 
           <ul class="inline-list product-meta">
             <li>
-              <span id="productPrice-{{ section.id }}" class="h1">
+              <span id="productPrice-{{ section.id }}" class="product-price">
                 {% include 'price' with variant.price %}
               </span>
             </li>
-            {% if product.compare_at_price_max > product.price and section.settings.product_show_saved_amount %}
-            <li>
-              <span id="comparePrice-{{ section.id }}" class="sale-tag large">
-                {% assign compare_price = variant.compare_at_price %}
-                {% assign product_price = variant.price %}
-                {% include 'price-sale' %}
-              </span>
-            </li>
-            {% endif %}
           </ul>
 
           {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
@@ -134,17 +125,11 @@
             {% endif %}
           {% endunless %}
 
-          <hr id="variantBreak" class="hr--clear hr--small">
-
           <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
-
-          {% capture "form_class" -%}
-            addToCartForm
-          {%- endcapture %}
 
           {%- capture "form_id" -%}addToCartForm-{{ section.id }}{%- endcapture -%}
 
-          {% form 'product', product, class:form_class, id:form_id %}
+          {% form 'product', product, class:'addToCartForm', id:form_id %}
             <select name="id" id="productSelect-{{ section.id }}" class="product-variants product-variants-{{ section.id }}">
               {% for variant in product.variants %}
                 {% if variant.available %}
@@ -164,38 +149,14 @@
               <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-selector">
             {% endif %}
 
-            {% if section.settings.product_quantity_message %}
-              <div id="variantQuantity-{{ section.id }}" class="variant-quantity {% if variant.inventory_management and variant.inventory_quantity < 10 and variant.inventory_quantity > 0 %} is-visible{% endif %}">
-                  {% include 'svg-definitions' with 'stock-icon' %}
-                    {% assign qty = variant.inventory_quantity %}
-                    <span id="variantQuantity-{{ section.id }}__message">{{ 'products.product.only_left' | t: count: qty }}</span>
-              </div>
-            {% endif %}
-
-            {% if section.settings.product_incoming_message %}
-              <div id="variantIncoming-{{ section.id }}" class="variant-quantity {% if variant.inventory_management and variant.inventory_quantity <= 0 and variant.incoming %} is-visible{% endif %}">
-                {% if variant.inventory_management and variant.inventory_quantity == 0 or variant.inventory_quantity < 0 and current_variant.incoming %}
-                  {% include 'svg-definitions' with 'stock-icon' %}
-                  {% if variant.available %}
-                    {% assign date = variant.next_incoming_date | date: "month_day_year" %}
-                    <span id="variantIncoming-{{ section.id }}__message">{{ 'products.product.will_not_ship_until' | t: date: date  }}</span>
-                  {% else %}
-                    {% assign date = variant.next_incoming_date | date: "month_day_year" %}
-                    <span id="variantIncoming-{{ section.id }}__message">{{ 'products.product.will_be_in_stock_after' | t: date: date }}</span>
-                  {% endif %}
-                {% endif %}
-              </div>
-            {% endif %}
-
             <div class="payment-buttons payment-buttons--{{ section.settings.add_to_cart_button_size }}">
               <button type="submit" name="add" id="addToCart-{{ section.id }}" class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}">
                 <span class="icon icon-cart"></span>
-                <span id="addToCartText-{{ section.id }}">{{ 'products.product.add_to_cart' | t }}</span>
+                <span id="addToCartText-{{ section.id }}">{{ 'products.product.add_to_cart' }}</span>
               </button>
             </div>
           {% endform %}
 
-          <hr class="{% if section.settings.enable_payment_button %}product-template-hr{% endif %}">
         </div>
       </div>
     </div>
@@ -254,6 +215,44 @@
 
 .divider-line {
   margin-bottom: 1rem;
+}
+
+.product-title {
+  font-family: Muli;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #b90b00;
+  margin-top: 92px;
+  margin-bottom: 0px;
+}
+
+.product-price {
+  font-family: Muli;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #505d68;
+}
+
+.product-meta {
+  margin-top: 28px;
+  margin-bottom: 0px;
+}
+
+.product-description {
+  margin-top: 43px;
+  margin-bottom: 0px;
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  color: #505d68;
+}
+
+.addToCartForm {
+  margin-top: 74px;
 }
 
 {% endstylesheet %}
