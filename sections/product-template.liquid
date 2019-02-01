@@ -93,38 +93,6 @@
             </div>
           {%- endif -%}
 
-          <div class="product-description rte" itemprop="description">
-            {{ product.description }}
-          </div>
-          {% unless product == empty %}
-            <script type="application/json" id="ProductJson-{{ section.id }}">
-              {{ product | json }}
-            </script>
-            {% if section.settings.product_quantity_message or section.settings.product_incoming_message %}
-              <script type="application/json" id="VariantJson-{{ section.id }}">
-                [
-                  {% for variant in product.variants %}
-                    {% capture variant_inventory %}
-                      {%- if section.settings.product_incoming_message -%}
-                        ,
-                        "incoming": {% if variant.incoming == 'null' or variant.next_incoming_date == null %}false{% else %}{{ variant.incoming | default: false | json }}{% endif %},
-                        "inventory_policy": {{ variant.inventory_policy | json }},
-                        "next_incoming_date": {{ variant.next_incoming_date | date: format: 'month_day_year' | json }}
-                      {%- endif -%}
-                      {%- if section.settings.product_quantity_message -%}
-                        ,
-                        "inventory_quantity": {{ variant.inventory_quantity | json }}
-                      {%- endif -%}
-                    {% endcapture %}
-                    {
-                      {{ variant_inventory | remove_first: ',' | strip }}
-                    }{% unless forloop.last %},{% endunless %}
-                  {% endfor %}
-                ]
-              </script>
-            {% endif %}
-          {% endunless %}
-
           <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
           {%- capture "form_id" -%}addToCartForm-{{ section.id }}{%- endcapture -%}
@@ -158,6 +126,41 @@
           {% endform %}
 
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="product-description rte" itemprop="description">
+          {{ product.description }}
+        </div>
+        {% unless product == empty %}
+          <script type="application/json" id="ProductJson-{{ section.id }}">
+            {{ product | json }}
+          </script>
+          {% if section.settings.product_quantity_message or section.settings.product_incoming_message %}
+            <script type="application/json" id="VariantJson-{{ section.id }}">
+              [
+                {% for variant in product.variants %}
+                  {% capture variant_inventory %}
+                    {%- if section.settings.product_incoming_message -%}
+                      ,
+                      "incoming": {% if variant.incoming == 'null' or variant.next_incoming_date == null %}false{% else %}{{ variant.incoming | default: false | json }}{% endif %},
+                      "inventory_policy": {{ variant.inventory_policy | json }},
+                      "next_incoming_date": {{ variant.next_incoming_date | date: format: 'month_day_year' | json }}
+                    {%- endif -%}
+                    {%- if section.settings.product_quantity_message -%}
+                      ,
+                      "inventory_quantity": {{ variant.inventory_quantity | json }}
+                    {%- endif -%}
+                  {% endcapture %}
+                  {
+                    {{ variant_inventory | remove_first: ',' | strip }}
+                  }{% unless forloop.last %},{% endunless %}
+                {% endfor %}
+              ]
+            </script>
+          {% endif %}
+        {% endunless %}
       </div>
     </div>
   </div>
