@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="homepage-header">Our Brands</h1>
+  <h1 class="homepage-header">Featured Brands</h1>
   <div class="row d-none d-sm-flex">
     <div class="col-sm-3 brand-tile">
       <a href="{{ settings.brand_url_1 }}" class="brand-link">
@@ -44,71 +44,37 @@
       </a>
     </div>
   </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_1 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_1 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_2 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_2 | img_url: "master" }}"/>
-      </a>
+  <div class="row">
+    <div class="col-12">
+      <div class="product-line d-flex">
+        Brands A-Z
+        <div class="divider-line"></div>
+      </div>
     </div>
   </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_3 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_3 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_4 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_4 | img_url: "master" }}"/>
-      </a>
-    </div>
-  </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_5 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_5 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_6 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_6 | img_url: "master" }}"/>
-      </a>
-    </div>
-  </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_7 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_7 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_8 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_8 | img_url: "master" }}"/>
-      </a>
-    </div>
+  <div class="row">
+    {% for collection in collections %}
+      {{ collections.length }}
+    {% endfor %}
   </div>
 </div>
 
-{% schema %}
 
-{
-  "name": "Our Brands",
-  "class": "brands-section",
-  "presets": [
-    {
-      "name": "Our Brands",
-      "category": "Inventory List"
-    }
-  ]
+<style>
+.product-line {
+  font-family: Muli;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.55;
+  letter-spacing: 1.9px;
+  color: #b90b00;
+  margin-top: 137px;
 }
-{% endschema %}
 
-{% stylesheet %}
+.divider-line {
+  margin-bottom: 0px;
+}
+
 .brand-tile > a > .brand-image {
   width: 50%;
 }
@@ -125,8 +91,4 @@
   text-align: center;
   align-self: center;
 }
-
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}
+</style>

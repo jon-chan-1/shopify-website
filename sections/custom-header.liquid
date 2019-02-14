@@ -1,0 +1,195 @@
+<nav class="navbar navbar-expand-lg custom-header-navbar">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li id="nav-spacer"></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link custom-nav-link" href="/pages/by-brand" aria-haspopup="true" aria-expanded="false">BY BRAND</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          {% for block in section.blocks %}
+            {% if block.type == "featured-brands" %}
+              {% assign brand_collection = collections[block.settings.featured_brand] %}
+              <a class="dropdown-item custom-nav-link" href="{{ brand_collection.url }}">{{ brand_collection.title | upcase }}</a>
+            {% endif %}
+          {% endfor %}
+          <a class="dropdown-item custom-nav-link" href="/pages/by-brand">SEE MORE</a>
+        </div>
+      </li>
+      {% for block in section.blocks %}
+        {% if block.type == "collection" %}
+          {% assign parent_collection = collections[block.settings.parent-collection] %}
+          {% assign sub_collection_1 = collections[block.settings.sub-collection-1] %}
+          {% assign sub_collection_2 = collections[block.settings.sub-collection-2] %}
+          {% assign sub_collection_3 = collections[block.settings.sub-collection-3] %}
+          {% assign sub_collection_4 = collections[block.settings.sub-collection-4] %}
+          {% assign sub_collection_5 = collections[block.settings.sub-collection-5] %}
+          {% assign sub_collection_6 = collections[block.settings.sub-collection-6] %}
+          {% assign sub_collection_7 = collections[block.settings.sub-collection-7] %}
+          {% assign sub_collection_8 = collections[block.settings.sub-collection-8] %}
+          {% assign sub_collection_9 = collections[block.settings.sub-collection-9] %}
+          {% assign sub_collection_10 = collections[block.settings.sub-collection-10] %}
+          <li class="nav-item dropdown">
+            <a class="nav-link custom-nav-link" href="{{ parent_collection.url }}" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+              {{ parent_collection.title | upcase }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              {% if sub_collection_1.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_2.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_2.url }}">{{ sub_collection_2.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_3.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_3.url }}">{{ sub_collection_3.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_4.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_4.url }}">{{ sub_collection_4.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_5.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_5.url }}">{{ sub_collection_5.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_6.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_6.url }}">{{ sub_collection_6.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_7.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_7.url }}">{{ sub_collection_7.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_8.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_8.url }}">{{ sub_collection_8.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_9.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_9.url }}">{{ sub_collection_9.title | upcase }}</a>
+              {% endif %}
+              {% if sub_collection_10.id != "" %}
+                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
+              {% endif %}
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "nav-bar-section",
+  "blocks": [
+    {
+      "name": "Parent Collection Group",
+      "type": "collection",
+      "settings": [
+        {
+          "id": "parent-collection",
+          "type": "collection",
+          "label": "Parent Collection"
+        },
+        {
+          "type": "collection",
+          "id": "sub-collection-1",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-2",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-3",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-4",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-5",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-6",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-7",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-8",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-9",
+          "label": "Sub Collection"
+        },
+        {
+          "type": "collection",
+		      "id": "sub-collection-10",
+          "label": "Sub Collection"
+        }
+      ]
+    },
+    {
+      "name": "Featured Brand",
+      "type": "featured-brands",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "featured_brand",
+          "label": "Featured Brand"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+@media (min-width: 992px) {
+  .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu {
+    margin-top: -24px;
+  }
+
+  #nav-spacer {
+    margin-left: 88px;
+  }
+}
+
+.custom-nav-link {
+  font-family: prompt;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #505d68;
+}
+
+.custom-header-navbar {
+  padding: 0px;
+}
+
+.nav-link {
+  height: 60px;
+  margin-bottom: 10px;
+  padding-top: 17px;
+}
+
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

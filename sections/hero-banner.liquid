@@ -1,0 +1,115 @@
+<div class="container super-hero">
+  {% for block in section.blocks %}
+    <div class="jumbotron jumptron-fluid" style="background-image:url({{ block.settings.hero-image-background | img_url: "master" }});background-size:cover;">
+      <div class="headline">
+        <h1 style="color:{{ block.settings.headline_color }};" class="headline-title">{{ block.settings.image_headline }}</h1>
+        <h1 style="color:{{ block.settings.headline_color }};" class="headline-sub-title">{{ block.settings.image_sub_headline }}</h1>
+        <a class="btn btn-primary btn-lg jumbotron-button" href="{{ block.settings.link }}" role="button">{{ block.settings.button-text }}</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+
+{
+  "name": "Hero Banner",
+  "class": "hero-banner-section",
+  "settings": [],
+  "max_blocks": 1,
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "hero-image-background",
+          "label": "Image",
+          "info": "1920px x 733px recommended"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "text",
+          "id": "image_headline",
+          "label": "Image Title"
+        },
+        {
+          "type": "text",
+          "id": "image_sub_headline",
+          "label": "Image Sub-Title"
+        },
+        {
+          "type": "color",
+          "id": "headline_color",
+          "label": "Image Text Color"
+        },
+        {
+          "type": "text",
+          "id": "button-text",
+          "label": "Button Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+.headline {
+  text-align: right;
+}
+
+.jumbotron {
+  background-color: #ffffff;
+  height: 549px;
+  padding-top: 137px;
+  padding-right: 108px;
+}
+
+.super-hero {
+  padding: 0px;
+}
+
+.headline-title, .headline-sub-title {
+  font-family: prompt;
+  font-size: 42px;
+  font-weight: bold;
+  letter-spacing: 4.5px;
+}
+
+.jumbotron-button {
+  margin-top: 64px;
+  margin-right: 130px;
+  width: 206px;
+  height: 40px;
+  border-radius: 0px;
+  background-color: #ffffff;
+  color: #363636;
+  font-family: prompt;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding-top: 11px;
+  border: none;
+}
+
+.jumbotron-button:hover {
+  background-color: #222222;
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
