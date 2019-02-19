@@ -132,9 +132,25 @@
   stroke: #000000;
   stroke-width: 1px;
 }
-.active-link {
-  font-weight: bold;
-  font-size: 24px;
+
+.scrollable-menu {
+  height: auto;
+  max-height: 220px;
+  overflow-x: hidden;
+}
+
+.input-group-append {
+  width: 100%;
+}
+
+.filter-button {
+  width: 100%;
+  margin-bottom: 10px;
+  white-space: normal;
+}
+
+.input-group > .input-group-append > .filter-button {
+  height: auto;
 }
 
 {% endstylesheet %}
@@ -155,7 +171,7 @@ function productArray(table) {
   var i;
   var hash = {};
 
-  for (i = 1; i < table.length-1; i++) {
+  for (i = 1; i < table.length; i++) {
     var row = table[i].children;
     var url = row[0].innerHTML;
     var image_url = row[1].innerHTML;
@@ -213,16 +229,43 @@ function filterArray(table) {
 function buildFilters(filters) {
   var sidebar = $('.sidebar-filter')[0];
   for (var filterGroup in filters) {
-    var div = $("<div>" + filterGroup + "</div>").appendTo(sidebar);
+    var div = $(newFilterGroup(filterGroup)).appendTo(sidebar);
+
+    var dropdownMenu = $('.dropdown-menu-' + formatLine(filterGroup) + ' > ul')[0];
 
     var options = filters[filterGroup];
     for (var index in options) {
       var filter = options[index];
-      var isActive = filter.active == "true" ? "active-link" : "inactive-link";
-      $('</br><a ' + filter.href + ' class="' + isActive + '">' + filter.tag + '</a>').appendTo(div);
+      var isActive = filter.active == "true" ? "checked" : "";
+      $(newFilterItem(filter.href, filter.tag, isActive)).appendTo(dropdownMenu);
     };
   };
 }
+
+function newFilterGroup(filterGroup) {
+  return '\
+<div class="input-group">\
+  <div class="input-group-append">\
+    <button class="btn btn-outline-secondary dropdown-toggle filter-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + filterGroup + '</button>\
+    <div class="dropdown-menu scrollable-menu dropdown-menu-' + formatLine(filterGroup) + '">\
+      <ul/>\
+    </div>\
+  </div>\
+</div>\
+  '
+};
+
+function newFilterItem(link, tag, isActive) {
+  console.log(link)
+  return '\
+<li>\
+  <a '+ link + ' class="dropdown-item">\
+    <input type="checkbox" onclick="window.location=\'' + link.slice(link.indexOf('"')+1, link.length-1) + '\';" ' + isActive + '>\
+    ' + tag + '\
+  </a>\
+</li>\
+  '
+};
 
 function loopProductLines(productLines) {
   for (var productLineIndex in productLines) {
