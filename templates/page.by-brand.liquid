@@ -46,16 +46,22 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <div class="product-line d-flex">
-        Brands A-Z
-        <div class="divider-line"></div>
+      <div class="product-line d-flex">Brands A-Z<div class="divider-line"></div>
       </div>
     </div>
   </div>
   <div class="row">
-    {% for collection in collections %}
-      {{ collections.length }}
-    {% endfor %}
+    <div class="col-12">
+      <ul>
+        {% for collection in collections %}
+          {% if collection.template_suffix == "brand" %}
+            <li>
+              <a href="{{ collection.url }}">{{ collection.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 

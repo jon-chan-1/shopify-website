@@ -1,0 +1,194 @@
+<footer class="site-footer small--text-center" role="contentinfo">
+  <div class="container">
+    <div class="product-line d-flex"><div class="divider-line" id="footer-divider-line"></div></div>
+    <div class="row">
+      <div class="col-sm-3">
+        <ul class="footer-list">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/pages/by-brand">Brands</a>
+          </li>
+          <li>
+            <a href="/collections/accessories-1">Accessories</a>
+          </li>
+          <li>
+            <a href="/collections/brakes">Brakes</a>
+          </li>
+          <li>
+            <a href="/collections/exterior">Exterior</a>
+          </li>
+          <li>
+            <a href="/collections/electronics">Electronics</a>
+          </li>
+          <li>
+            <a href="/collections/engine">Engine</a>
+          </li>
+          <li>
+            <a href="/collections/interior">Interior</a>
+          </li>
+          <li>
+            <a href="/collections/suspension">Suspension</a>
+          </li>
+          <li>
+            <a href="/collections/drivetrain">Drivetrain</a>
+          </li>
+          <li>
+            <a href="/collections/wheels">Wheels</a>
+          </li>
+          <li>
+            <a href="/collections/specials">Specials</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6"></div>
+      <div class="col-sm-3">
+        <div class="row">
+          <div class-"col-12">
+            <h4 id="our-location">
+              <a href="https://crownspeedlab.com/pages/contact-us">Our Location</a>
+            </h4>
+            <div class="footer-address">
+              <p>133-38 32nd Ave
+              <br>Flushing, NY 11354</p>
+              <p>(718) 539-6127</p>
+            </div>
+            <div class="footer-hours">
+              <p>Business Hours:
+              <br>Monday-Friday: 8 AM - 6 PM
+              <br>Saturday: 8 AM - 3 PM
+              <br>Sunday: Closed</p>
+            </div>
+          </div>
+        </div>
+        <div class="row social-media">
+          <a href="https://www.facebook.com/Crownspeedlab/" target="_blank">
+            <img src="{{ 'flogo-RGB-HEX-Blk-512.png' | asset_img_url: '48x48' }}" alt="flogo" id="flogo">
+          </a>
+          <a href="https://www.instagram.com/crownspeedlab/" target="_blank">
+            <img src="{{ 'glyph-logo_May2016.png' | asset_img_url: '48x48' }}" alt="instalogo" id="instalogo">
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "footer-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Legal menu"
+    }
+  ],
+  "max_blocks": 9,
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Quick links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Rich text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Get in touch"
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Text",
+          "default": "<p>Use this text to share information about your brand with your customers.</p>"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Newsletter"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
+        },
+        {
+          "type": "paragraph",
+          "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+#footer-divider-line {
+  margin-left: 0px;
+}
+
+.footer-list > li > a {
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: bold;
+  color: #222222;
+}
+
+#our-location > a {
+  font-family: Muli;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.55;
+  letter-spacing: 1.9px;
+  color: #b90b00;
+}
+
+.footer-address > p {
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  color: #505d68;
+}
+
+.footer-hours > p {
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: bold;
+  color: #222222;
+}
+
+.social-media > a {
+  margin-right: 10px;
+}
+{% endstylesheet %}
