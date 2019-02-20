@@ -1,3 +1,8 @@
+{% assign inquiryOnly = false %}
+{% if product.tags contains "Inquiry Only" %}
+  {% assign inquiryOnly = true %}
+{% endif %}
+
 <div class="container">
   <div id="ProductSection" data-section-id="{{ section.id }}" data-section-type="product-template" data-zoom-toggle="zoom-in" data-zoom-enabled="{{ section.settings.product_image_zoom_enable }}" data-related-enabled="{{ section.settings.product_related_enable }}" data-social-sharing="{{ section.settings.social_sharing }}" data-show-compare-at-price="{{ section.settings.product_show_compare_at_price }}" data-stock="{{ section.settings.product_quantity_message }}" data-incoming-transfer="{{ section.settings.product_incoming_message }}" data-ajax-cart-method="{{ settings.ajax_cart_method }}">
     <div class="row">
@@ -71,27 +76,31 @@
 
           {% assign variant = product.selected_or_first_available_variant %}
 
-          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-          <meta itemprop="price" content="{{ variant.price | divided_by: 100.00 }}">
+          {% if inquiryOnly %}
+          {% else %}
+            <script>console.log("hi")</script>
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ variant.price | divided_by: 100.00 }}">
 
-          <ul class="inline-list product-meta">
-            <li>
-              <span id="productPrice-{{ section.id }}" class="product-price">
-                {% include 'price' with variant.price %}
-              </span>
-            </li>
-          </ul>
+            <ul class="inline-list product-meta">
+              <li>
+                <span id="productPrice-{{ section.id }}" class="product-price">
+                  {% include 'price' with variant.price %}
+                </span>
+              </li>
+            </ul>
 
-          {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-            <div class="product__policies rte">
-              {%- if shop.taxes_included -%}
-                {{ 'products.general.include_taxes' | t }}
-              {%- endif -%}
-              {%- if shop.shipping_policy.body != blank -%}
-                {{ 'products.general.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-              {%- endif -%}
-            </div>
-          {%- endif -%}
+            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+              <div class="product__policies rte">
+                {%- if shop.taxes_included -%}
+                  {{ 'products.general.include_taxes' | t }}
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.general.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {% endif %}
 
           <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
@@ -112,19 +121,26 @@
               {% endfor %}
             </select>
 
-            {% if section.settings.product_quantity_enable %}
-              <label for="quantity" class="quantity-selector quantity-selector-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
-              <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-selector">
+            {% if inquiryOnly %}
+              <a href="mailto:info@crownautony.com?subject=Request for pricing: {{ product.title }}&body=I am interested in {{ product.title }}. Please provide the pricing for this specific variant:%0Ahttps://crownspeedlab.com{{ variant.url }}">
+                <button class="btn btn-primary" type="button">
+                  Email For Pricing
+                </button>
+              </a>
+            {% else %}
+              {% if section.settings.product_quantity_enable %}
+                <label for="quantity" class="quantity-selector quantity-selector-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-selector">
+              {% endif %}
+
+              <div class="payment-buttons payment-buttons--{{ section.settings.add_to_cart_button_size }}">
+                <button type="submit" name="add" id="addToCart-{{ section.id }}" class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}">
+                  <span class="icon icon-cart"></span>
+                  <span id="addToCartText-{{ section.id }}">{{ 'products.product.add_to_cart' }}</span>
+                </button>
+              </div>
             {% endif %}
-
-            <div class="payment-buttons payment-buttons--{{ section.settings.add_to_cart_button_size }}">
-              <button type="submit" name="add" id="addToCart-{{ section.id }}" class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}">
-                <span class="icon icon-cart"></span>
-                <span id="addToCartText-{{ section.id }}">{{ 'products.product.add_to_cart' }}</span>
-              </button>
-            </div>
           {% endform %}
-
         </div>
       </div>
     </div>
@@ -165,9 +181,7 @@
     </div>
   </div>
 </div>
-
-
-
+<div id="globo-recommendations"></div>
 {% schema %}
 {
   "name": "Product",

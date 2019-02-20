@@ -153,6 +153,12 @@
   height: auto;
 }
 
+.filter-active {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
 {% endstylesheet %}
 
 {% javascript %}
@@ -229,7 +235,7 @@ function filterArray(table) {
 function buildFilters(filters) {
   var sidebar = $('.sidebar-filter')[0];
   for (var filterGroup in filters) {
-    var div = $(newFilterGroup(filterGroup)).appendTo(sidebar);
+    $(newFilterGroup(filterGroup)).appendTo(sidebar);
 
     var dropdownMenu = $('.dropdown-menu-' + formatLine(filterGroup) + ' > ul')[0];
 
@@ -237,6 +243,10 @@ function buildFilters(filters) {
     for (var index in options) {
       var filter = options[index];
       var isActive = filter.active == "true" ? "checked" : "";
+
+      if (isActive == "checked") {
+        $('.filter-button-' + formatLine(filterGroup) + ':first').addClass("filter-active")
+      };
       $(newFilterItem(filter.href, filter.tag, isActive)).appendTo(dropdownMenu);
     };
   };
@@ -246,7 +256,7 @@ function newFilterGroup(filterGroup) {
   return '\
 <div class="input-group">\
   <div class="input-group-append">\
-    <button class="btn btn-outline-secondary dropdown-toggle filter-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + filterGroup + '</button>\
+    <button class="btn btn-outline-secondary dropdown-toggle filter-button filter-button-' + formatLine(filterGroup) + '" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + filterGroup + '</button>\
     <div class="dropdown-menu scrollable-menu dropdown-menu-' + formatLine(filterGroup) + '">\
       <ul/>\
     </div>\
@@ -256,7 +266,6 @@ function newFilterGroup(filterGroup) {
 };
 
 function newFilterItem(link, tag, isActive) {
-  console.log(link)
   return '\
 <li>\
   <a '+ link + ' class="dropdown-item">\
