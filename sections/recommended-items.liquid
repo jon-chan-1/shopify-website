@@ -1,0 +1,127 @@
+<div class="container">
+  <h2 class="homepage-header">Items you might like</h2>
+  <div class="row">
+    <div class="col-1">
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </div>
+    <div class="col-10">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <div class="carousel-inner slide-fade d-flex">
+          {% for block in section.blocks %}
+            {% assign product = all_products[block.settings.recommended-product] %}
+            <div class="carousel-item col-md-3 {% if block == section.blocks[0] %}active{% endif %}">
+              {% include 'product-card' %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-1">
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a></div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Recommended Items",
+  "class": "recommended-items-section",
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Recommended Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "recommended-product",
+          "label": "Recommended Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recommended Items",
+      "category": "Inventory List"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+.slide-fade > div.show {
+  display: block;
+}
+
+.carousel-item {
+  display: none;
+  transition: none!important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 24px;
+  width: 24px;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 24px;
+  color: #c2d1d9;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 24px;
+  color: #c2d1d9;
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+
+function init() {
+  for (var i = 0; i < 4; i++) {
+    $($('.carousel-item')[i]).addClass('show');
+  };
+};
+
+function handler() {
+
+  $('.carousel').on('slid.bs.carousel', function(e) {
+    if (e.direction == 'left') {
+      $('.carousel-inner').append($('.carousel-item:first'))
+    }
+    else {
+      $('.carousel-inner').prepend($('.carousel-item:last'))
+    }
+    for (var i = $('.carousel-item').length -1; i >= 0; i--) {
+      if (i > 3) {
+        $($('.carousel-item')[i]).removeClass('show');
+      }
+      else {
+        $($('.carousel-item')[i]).addClass('show');
+      };
+    };
+  });
+};
+
+$(document).ready(function() {
+  init();
+
+  handler();
+});
+
+
+
+{% endjavascript %}

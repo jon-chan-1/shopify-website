@@ -1,9 +1,9 @@
 <div class="container super-hero">
   {% for block in section.blocks %}
-    <div class="jumbotron jumptron-fluid" style="background-image:url({{ block.settings.hero-image-background | img_url: "master" }});background-size:cover;">
+    <div class="jumbotron jumptron-fluid" style="background-image:url({{ block.settings.hero-image-background | img_url: "master" }});background-size:cover;" alt="{{ block.settings.image-alt-text }}">
       <div class="headline">
-        <h1 style="color:{{ block.settings.headline_color }};" class="headline-title">{{ block.settings.image_headline }}</h1>
-        <h1 style="color:{{ block.settings.headline_color }};" class="headline-sub-title">{{ block.settings.image_sub_headline }}</h1>
+        <h2 style="color:{{ block.settings.headline_color }};" class="headline-title">{{ block.settings.image_headline }}</h2>
+        <h2 style="color:{{ block.settings.headline_color }};" class="headline-sub-title">{{ block.settings.image_sub_headline }}</h2>
         <a class="btn btn-primary btn-lg jumbotron-button" href="{{ block.settings.link }}" role="button">{{ block.settings.button-text }}</a>
       </div>
     </div>
@@ -58,6 +58,12 @@
           "type": "text",
           "id": "button-text",
           "label": "Button Text"
+        },
+        {
+          "type": "text",
+          "id": "image-alt-text",
+          "label": "Image Alt Text",
+          "info": "Be concise and descriptive"
         }
       ]
     }

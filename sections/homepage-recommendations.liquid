@@ -1,0 +1,188 @@
+<div class="container">
+  <h2 class="homepage-header">Recommendations for you</h2>
+  <div class="row d-none d-sm-flex">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-6 square">
+          <a href="{{ section.settings.top_left_url }}">
+            <img class="img-fluid" src="{{ section.settings.top_left_image | img_url: "master" }}" alt="{{ section.settings.top_left_alt }}"/>
+          </a>
+        </div>
+        <div class="col-sm-6 square">
+          <a href="{{ section.settings.top_center_url }}">
+            <img class="img-fluid" src="{{ section.settings.top_center_image | img_url: "master" }}" alt="{{ section.settings.top_center_alt }}"/>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 long-rectangle">
+          <a href="{{ section.settings.bottom_left_url }}">
+            <img class="img-fluid" src="{{ section.settings.bottom_left_image | img_url: "master" }}" alt="{{ section.settings.bottom_left_alt }}"/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 tall-rectangle">
+      <a href="{{ section.settings.right_url }}">
+        <img class="img-fluid" src="{{ section.settings.right_image | img_url: "master" }}" alt="{{ section.settings.right_alt }}"/>
+      </a>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="row mobile-image">
+      <a href="{{ section.settings.top_left_url }}">
+        <img class="img-fluid" src="{{ section.settings.top_left_image | img_url: "master" }}" alt="{{ section.settings.top_left_alt }}"/>
+      </a>
+    </div>
+    <div class="row mobile-image">
+      <a href="{{ section.settings.top_center_url }}">
+        <img class="img-fluid" src="{{ section.settings.top_center_image | img_url: "master" }}" alt="{{ section.settings.top_center_alt }}"/>
+      </a>
+    </div>
+    <div class="row mobile-image">
+      <a href="{{ section.settings.bottom_left_url }}">
+        <img class="img-fluid" src="{{ section.settings.bottom_left_image | img_url: "master" }}" alt="{{ section.settings.bottom_left_alt }}"/>
+      </a>
+    </div>
+    <div class="row mobile-image">
+      <a href="{{ section.settings.right_url }}">
+        <img class="img-fluid" src="{{ section.settings.right_image | img_url: "master" }}" alt="{{ section.settings.right_alt }}"/>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Recommendations",
+  "class": "recommendations-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "top_left_image",
+      "label": "Top Left Image",
+      "info": "Recommended 600px x 600px"
+    },
+    {
+      "type": "text",
+      "id": "top_left_alt",
+      "label": "Top Left Alt Text"
+    },
+    {
+      "type": "url",
+      "id": "top_left_url",
+      "label": "Top Left Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_center_image",
+      "label": "Top Center Image",
+      "info": "Recommended 600px x 600px"
+    },
+    {
+      "type": "text",
+      "id": "top_center_alt",
+      "label": "Top Center Alt Text"
+    },
+    {
+      "type": "url",
+      "id": "top_center_url",
+      "label": "Top Center Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image",
+      "info": "Recommended 600px x 1028px"
+    },
+    {
+      "type": "text",
+      "id": "right_alt",
+      "label": "Right Alt Text"
+    },
+    {
+      "type": "url",
+      "id": "right_url",
+      "label": "Right Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_left_image",
+      "label": "Bottom Left Image",
+      "info": "Recommended 600px x 288px"
+    },
+    {
+      "type": "text",
+      "id": "bottom_left_alt",
+      "label": "Bottom Left Alt"
+    },
+    {
+      "type": "url",
+      "id": "bottom_left_url",
+      "label": "Bottom Left Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recommendations",
+      "category": "Inventory List"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+.square {
+  max-height: 276px;
+  width: 276px;
+  overflow: hidden;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.long-rectangle {
+  max-height: 276px;
+  width: 576px;
+  overflow: hidden;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.tall-rectangle {
+  max-height: 576px;
+  width: 336px;
+  overflow: hidden;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.mobile-image {
+  height: 276px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.top-left-text {
+  position: absolute;
+}
+
+.top-center-text {
+  position: absolute;
+}
+
+.bottom-left-text {
+  position: absolute;
+}
+
+.right-text {
+  position: absolute;
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

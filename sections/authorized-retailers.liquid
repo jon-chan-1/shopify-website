@@ -1,0 +1,101 @@
+<div class="container">
+  <h2 class="homepage-header">Authorized by</h2>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="row">
+        {% for block in section.blocks %}
+          {%- capture col_size -%}
+            {{ 12 | divided_by: forloop.length }}
+          {%- endcapture -%}
+          <div class="col-sm-{{ col_size }}">
+            <div class="card border-0">
+              <img class="card-img-top authorized-logo" src="{{ block.settings.retailer-image | img_url: "master" }}" alt="Card image cap">
+              <div class="card-body authorized-text">
+                <h4 class="card-text">{{ block.settings.retailer-title }}</h4>
+                <p class="card-text">{{ block.settings.retailer-description }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Authorized Retailers",
+  "class": "authorized-retailers-section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "something",
+      "name": "Retailer",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "retailer-image",
+          "label": "Retailer Image"
+        },
+        {
+          "type": "text",
+          "id": "retailer-title",
+          "label": "Retailer Name"
+        },
+        {
+          "type": "text",
+          "id": "retailer-description",
+          "label": "Retailer Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Authorized Retailers",
+      "category": "Retailer List"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+.authorized-logo {
+  border-radius: 50%;
+  width: 137px;
+  height: 137px;
+  display: block;
+  margin: auto;
+}
+
+.authorized-text {
+  padding-top: 44px;
+}
+
+.authorized-text > h4 {
+  font-family: Muli;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.58;
+  letter-spacing: 1.7px;
+  text-align: center;
+  color: #505d68;
+}
+
+.authorized-text > p {
+  font-family: Muli;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: #a1aeb7;
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+
+{% endjavascript %}
