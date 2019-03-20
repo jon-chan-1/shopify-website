@@ -5,8 +5,8 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li id="nav-spacer"></li>
-      <li class="nav-item dropdown">
-        <a class="nav-link custom-nav-link" href="/pages/by-brand" aria-haspopup="true" aria-expanded="false">BY BRAND</a>
+      <li class="nav-item dropdown nav-link custom-nav-link">
+        BY BRAND
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           {% for block in section.blocks %}
             {% if block.type == "featured-brands" %}
@@ -14,7 +14,7 @@
               <a class="dropdown-item custom-nav-link" href="{{ brand_collection.url }}">{{ brand_collection.title | upcase }}</a>
             {% endif %}
           {% endfor %}
-          <a class="dropdown-item custom-nav-link" href="/pages/by-brand">SEE MORE</a>
+          <a class="dropdown-item custom-nav-link" href="/pages/by-brand">SEE ALL</a>
         </div>
       </li>
       {% for block in section.blocks %}
@@ -30,10 +30,8 @@
           {% assign sub_collection_8 = collections[block.settings.sub-collection-8] %}
           {% assign sub_collection_9 = collections[block.settings.sub-collection-9] %}
           {% assign sub_collection_10 = collections[block.settings.sub-collection-10] %}
-          <li class="nav-item dropdown">
-            <a class="nav-link custom-nav-link" href="{{ parent_collection.url }}" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
-              {{ parent_collection.title | upcase }}
-            </a>
+          <li class="nav-item dropdown custom-nav-link nav-link">
+            {{ parent_collection.title | upcase }}
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               {% if sub_collection_1.id != "" %}
                 <a class="dropdown-item custom-nav-link" href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
@@ -65,6 +63,7 @@
               {% if sub_collection_10.id != "" %}
                 <a class="dropdown-item custom-nav-link" href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
               {% endif %}
+                <a class="dropdown-item custom-nav-link" href="{{ parent_collection.url }}">SEE ALL</a>
             </div>
           </li>
         {% endif %}
