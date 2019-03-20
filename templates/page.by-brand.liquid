@@ -1,49 +1,28 @@
 <div class="container">
   <h2 class="homepage-header">Featured Brands</h2>
-  <div class="row d-none d-sm-flex">
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_1 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_1 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_2 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_2 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_3 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_3 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_4 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_4 | img_url: "master" }}"/>
-      </a>
-    </div>
-  </div>
-  <div class="row d-none d-sm-flex">
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_5 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_5 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_6 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_6 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_7 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_7 | img_url: "master" }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_8 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_8 | img_url: "master" }}"/>
-      </a>
-    </div>
-  </div>
+    {%- for collection in collections -%}
+      {%- if collection.template_suffix == "brand" -%}
+        {%- capture count-%}{%- increment counter -%}{%- endcapture -%}
+        {%- capture index -%}{{- count | modulo: 8 -}}{%- endcapture -%}
+        {%- if index == "0" -%}
+          <div class="row">
+            <div class="col-2"></div>
+        {%- endif -%}
+            <div class="col-1 d-flex">
+              <a href="{{ collection.url }}" class="brand-link">
+                <img class="img-fluid brand-image" src="{{ collection.image | img_url: "master" }}" alt-text="{{ collection.title }} logo"/>
+              </a>
+            </div>
+        {%- if index == "7" -%}
+            <div class="col-2"></div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if forloop.last == true and index != "7" -%}
+          <div class="col-2"></div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
   <div class="row">
     <div class="col-12">
       <div class="product-line d-flex">Brands A-Z<div class="divider-line"></div>
