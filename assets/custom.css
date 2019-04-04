@@ -1,13 +1,12 @@
 /*==============================================================================
   #Custom CSS
 ==============================================================================*/
-@media (min-width: 992px) {
-  .container {
-    max-width: 100%;
-    padding-left: 96px;
-    padding-right: 96px;
-    margin: 0px;
-  }
+.container {
+  max-width: 960px;
+}
+
+.container-fluid {
+  padding: 0px
 }
 
 .breadcrumb {

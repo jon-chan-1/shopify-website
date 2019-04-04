@@ -1,14 +1,21 @@
-<div class="container super-hero">
-  {% for block in section.blocks %}
-    <div class="jumbotron jumptron-fluid" style="background-image:url({{ block.settings.hero-image-background | img_url: "master" }});background-size:cover;" alt="{{ block.settings.image-alt-text }}">
-      <div class="headline">
-        <h2 style="color:{{ block.settings.headline_color }};" class="headline-title">{{ block.settings.image_headline }}</h2>
-        <h2 style="color:{{ block.settings.headline_color }};" class="headline-sub-title">{{ block.settings.image_sub_headline }}</h2>
-        <a class="btn btn-primary btn-lg jumbotron-button" href="{{ block.settings.link }}" role="button">{{ block.settings.button-text }}</a>
-      </div>
-    </div>
-  {% endfor %}
-</div>
+{% for block in section.blocks %}
+  <div class="container-fluid super-hero d-none d-sm-block">
+    <img class="img-fluid fill-width" src="{{ block.settings.hero-image-background | img_url: "master" }}" alt="{{ block.settings.image-alt-text }}">
+    <span class="headline">
+      <h2 style="color:{{ block.settings.headline_color }};" class="headline-title">{{ block.settings.image_headline }}</h2>
+      <h2 style="color:{{ block.settings.headline_color }};" class="headline-sub-title">{{ block.settings.image_sub_headline }}</h2>
+      <a class="btn btn-primary btn-lg jumbotron-button" href="{{ block.settings.link }}" role="button">{{ block.settings.button-text }}</a>
+    </span>
+  </div>
+  <div class="container-fluid super-hero d-sm-none">
+    <img class="img-fluid fill-width" src="{{ block.settings.hero-image-mobile | img_url: "master" }}" alt="{{ block.settings.image-alt-text }}">
+    <span class="headline">
+      <h2 style="color:{{ block.settings.headline_color }};" class="headline-title">{{ block.settings.image_headline }}</h2>
+      <h2 style="color:{{ block.settings.headline_color }};" class="headline-sub-title">{{ block.settings.image_sub_headline }}</h2>
+    </span>
+    <a class="btn btn-primary btn-lg jumbotron-button" href="{{ block.settings.link }}" role="button">{{ block.settings.button-text }}</a>
+  </div>
+{% endfor %}
 
 {% schema %}
 
@@ -32,7 +39,7 @@
           "type": "image_picker",
           "id": "hero-image-background",
           "label": "Image",
-          "info": "1920px x 733px recommended"
+          "info": "2048px x 1018px recommended"
         },
         {
           "type": "url",
@@ -64,6 +71,12 @@
           "id": "image-alt-text",
           "label": "Image Alt Text",
           "info": "Be concise and descriptive"
+        },
+        {
+          "type": "image_picker",
+          "id": "hero-image-mobile",
+          "label": "Mobile Image",
+          "info": "750px x 956px recommended"
         }
       ]
     }
@@ -73,33 +86,72 @@
 
 {% stylesheet %}
 
-.headline {
-  text-align: right;
+@media (min-width: 576px) {
+  .headline {
+    text-align: right;
+    top: 50%;
+    right: 15%;
+  }
+
+  .jumbotron-button {
+    width: 206px;
+    height: 40px;
+  }
 }
 
-.jumbotron {
-  background-color: #ffffff;
-  height: 549px;
-  padding-top: 137px;
-  padding-right: 108px;
+@media (max-width: 575.98px) {
+  .headline {
+    top: 10%;
+    right: 25%;
+    text-align: center;
+  }
+
+  .jumbotron-button {
+    position: absolute;
+    vertical-align: center;
+    bottom: 10%;
+    right: 40%;
+  }
+}
+
+@media (min-width: 992px) {
+  .headline-title, .headline-sub-title {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 4.5px;
+  }
+
+  .jumbotron-button {
+    margin-top: 64px;
+    padding-top: 11px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .headline-title, .headline-sub-title {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+  }
+}
+
+.fill-width {
+  width: 100%;
+}
+
+.headline {
+  position: absolute;
 }
 
 .super-hero {
-  padding: 0px;
+  position: relative;
 }
 
 .headline-title, .headline-sub-title {
   font-family: prompt;
-  font-size: 42px;
-  font-weight: bold;
-  letter-spacing: 4.5px;
 }
 
 .jumbotron-button {
-  margin-top: 64px;
-  margin-right: 130px;
-  width: 206px;
-  height: 40px;
   border-radius: 0px;
   background-color: #ffffff;
   color: #363636;
@@ -107,7 +159,6 @@
   font-size: 12px;
   letter-spacing: 2px;
   text-align: center;
-  padding-top: 11px;
   border: none;
 }
 

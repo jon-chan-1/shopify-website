@@ -1,0 +1,41 @@
+<div class="container">
+  <h1 class="main-tagline">
+    {{ section.settings.main_header_text }}
+  </h1>
+</div>
+
+{% schema %}
+  {
+    "name": "Main Header",
+    "class": "main-header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_header_text",
+        "label": "H1 Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Main Header",
+        "category": "Tag Line"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.main-tagline {
+  font-family: Muli;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 3.56;
+  letter-spacing: 1.5px;
+  text-align: center;
+  color: #262626;
+  margin-top: 22px;
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
