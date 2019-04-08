@@ -41,8 +41,7 @@
 
 .homepage-header {
   text-align: center;
-  padding-top: 98px;
-  padding-bottom: 58px;
+  margin-bottom: 16px;
   font-family: muli;
   font-size: 32px;
   font-weight: bold;
@@ -83,4 +82,8 @@ ol {
 .product-line {
   flex-direction: row;
   align-items: center;
+}
+
+.mt-60 {
+  margin-top: 60px;
 }

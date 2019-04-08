@@ -1,57 +1,82 @@
-<div class="container">
-  <h2 class="homepage-header">Recommendations for you</h2>
-  <div class="row d-none d-sm-flex">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-6 square">
+<div class="container mt-60">
+  <div class="col-1-sm"></div>
+  <div class="col-10-sm">
+    <h2 class="product-line d-flex homepage-header">
+      THE PARTS
+      <div class="divider-line"></div>
+    </h2>
+    <div class="row">
+      <div class="col-sm-12 parts-tagline">
+        We have a selection of performance auto parts.
+      </div>
+    </div>
+    <div class="row overflow-hidden">
+      <div class="col-sm-6 hover-group">
+        <div class="hover-background">
           <a href="{{ section.settings.top_left_url }}">
-            <img class="img-fluid" src="{{ section.settings.top_left_image | img_url: "master" }}" alt="{{ section.settings.top_left_alt }}"/>
+            <img class="img-fluid long-img hover-img" src="{{ section.settings.top_left_image | img_url: "master" }}" alt="{{ section.settings.top_left_alt }}">
+            <span class="hover-text">
+              {{ section.settings.top_left_text }}
+            </span>
           </a>
         </div>
-        <div class="col-sm-6 square">
+      </div>
+      <div class="col-sm-3 hover-group">
+        <div class="hover-background">
           <a href="{{ section.settings.top_center_url }}">
-            <img class="img-fluid" src="{{ section.settings.top_center_image | img_url: "master" }}" alt="{{ section.settings.top_center_alt }}"/>
+            <img class="img-fluid hover-img" src="{{ section.settings.top_center_image | img_url: "master" }}" alt="{{ section.settings.top_center_alt }}">
+            <span class="hover-text">
+              {{ section.settings.top_center_text }}
+            </span>
           </a>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12 long-rectangle">
+      <div class="col-sm-3 hover-group">
+        <div class="hover-background">
+          <a href="{{ section.settings.top_right_url }}">
+            <img class="img-fluid hover-img" src="{{ section.settings.top_right_image | img_url: "master" }}" alt="{{ section.settings.top_right_alt }}">
+            <span class="hover-text">
+              {{ section.settings.top_right_text }}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="row overflow-hidden">
+      <div class="col-sm-3 hover-group">
+        <div class="hover-background">
           <a href="{{ section.settings.bottom_left_url }}">
-            <img class="img-fluid" src="{{ section.settings.bottom_left_image | img_url: "master" }}" alt="{{ section.settings.bottom_left_alt }}"/>
+            <img class="img-fluid hover-img" src="{{ section.settings.bottom_left_image | img_url: "master" }}" alt="{{ section.settings.bottom_left_alt }}">
+            <span class="hover-text">
+              {{ section.settings.bottom_left_text }}
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-3 hover-group">
+        <div class="hover-background">
+          <a href="{{ section.settings.bottom_center_url }}">
+            <img class="img-fluid hover-img" src="{{ section.settings.bottom_center_image | img_url: "master" }}" alt="{{ section.settings.bottom_center_alt }}">
+            <span class="hover-text">
+              {{ section.settings.bottom_center_text }}
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6 hover-group">
+        <div class="hover-background">
+          <a href="{{ section.settings.bottom_right_url }}">
+            <img class="img-fluid long-img hover-img" src="{{ section.settings.bottom_right_image | img_url: "master" }}" alt="{{ section.settings.bottom_right_alt }}">
+            <span class="hover-text">
+              {{ section.settings.bottom_right_text }}
+            </span>
           </a>
         </div>
       </div>
     </div>
-    <div class="col-sm-4 tall-rectangle">
-      <a href="{{ section.settings.right_url }}">
-        <img class="img-fluid" src="{{ section.settings.right_image | img_url: "master" }}" alt="{{ section.settings.right_alt }}"/>
-      </a>
-    </div>
-    <div class="col-sm-1"></div>
   </div>
-  <div class="row d-sm-none">
-    <div class="row mobile-image">
-      <a href="{{ section.settings.top_left_url }}">
-        <img class="img-fluid" src="{{ section.settings.top_left_image | img_url: "master" }}" alt="{{ section.settings.top_left_alt }}"/>
-      </a>
-    </div>
-    <div class="row mobile-image">
-      <a href="{{ section.settings.top_center_url }}">
-        <img class="img-fluid" src="{{ section.settings.top_center_image | img_url: "master" }}" alt="{{ section.settings.top_center_alt }}"/>
-      </a>
-    </div>
-    <div class="row mobile-image">
-      <a href="{{ section.settings.bottom_left_url }}">
-        <img class="img-fluid" src="{{ section.settings.bottom_left_image | img_url: "master" }}" alt="{{ section.settings.bottom_left_alt }}"/>
-      </a>
-    </div>
-    <div class="row mobile-image">
-      <a href="{{ section.settings.right_url }}">
-        <img class="img-fluid" src="{{ section.settings.right_image | img_url: "master" }}" alt="{{ section.settings.right_alt }}"/>
-      </a>
-    </div>
-  </div>
+  <div class="col-1-sm"></div>
 </div>
 
 {% schema %}
@@ -64,12 +89,13 @@
       "type": "image_picker",
       "id": "top_left_image",
       "label": "Top Left Image",
-      "info": "Recommended 600px x 600px"
+      "info": "Recommended 1000px x 500px"
     },
     {
       "type": "text",
       "id": "top_left_alt",
-      "label": "Top Left Alt Text"
+      "label": "Top Left Picture Description (Alt Text)",
+      "info": "This is for SEO purposes"
     },
     {
       "type": "url",
@@ -77,15 +103,22 @@
       "label": "Top Left Link"
     },
     {
+      "type": "text",
+      "id": "top_left_text",
+      "label": "Top Left Visible Text",
+      "info": "This is what will actually show on the page"
+    },
+    {
       "type": "image_picker",
       "id": "top_center_image",
       "label": "Top Center Image",
-      "info": "Recommended 600px x 600px"
+      "info": "Recommended 500px x 500px"
     },
     {
       "type": "text",
       "id": "top_center_alt",
-      "label": "Top Center Alt Text"
+      "label": "Top Center Picture Description (Alt Text)",
+      "info": "This is for SEO purposes"
     },
     {
       "type": "url",
@@ -93,36 +126,102 @@
       "label": "Top Center Link"
     },
     {
+      "type": "text",
+      "id": "top_center_text",
+      "label": "Top Center Visible Text",
+      "info": "This is what will actually show on the page"
+    },
+    {
       "type": "image_picker",
-      "id": "right_image",
-      "label": "Right Image",
-      "info": "Recommended 600px x 1028px"
+      "id": "top_right_image",
+      "label": "Top Right Image",
+      "info": "Recommended 500px x 500px"
     },
     {
       "type": "text",
-      "id": "right_alt",
-      "label": "Right Alt Text"
+      "id": "top_right_alt",
+      "label": "Top Right Picture Description (Alt Text)",
+      "info": "This is for SEO purposes"
     },
     {
       "type": "url",
-      "id": "right_url",
-      "label": "Right Link"
+      "id": "top_right_url",
+      "label": "Top Right Link"
+    },
+    {
+      "type": "text",
+      "id": "top_right_text",
+      "label": "Top Right Visible Text",
+      "info": "This is what will actually show on the page"
     },
     {
       "type": "image_picker",
       "id": "bottom_left_image",
       "label": "Bottom Left Image",
-      "info": "Recommended 600px x 288px"
+      "info": "Recommended 500px x 500px"
     },
     {
       "type": "text",
       "id": "bottom_left_alt",
-      "label": "Bottom Left Alt"
+      "label": "Bottom Left Picture Description (Alt Text)",
+      "info": "This is for SEO purposes"
     },
     {
       "type": "url",
       "id": "bottom_left_url",
       "label": "Bottom Left Link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_left_text",
+      "label": "Bottom Left Visible Text",
+      "info": "This is what will actually show on the page"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_center_image",
+      "label": "Bottom Center Image",
+      "info": "Recommended 500px x 500px"
+    },
+    {
+      "type": "text",
+      "id": "bottom_center_alt",
+      "label": "Bottom Center Picture Description (Alt Text)",
+      "info": "This is for SEO purposes"
+    },
+    {
+      "type": "url",
+      "id": "bottom_center_url",
+      "label": "Bottom Center Link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_center_text",
+      "label": "Bottom Center Visible Text",
+      "info": "This is what will actually show on the page"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_right_image",
+      "label": "Bottom Right Image",
+      "info": "Recommended 1000px x 500px"
+    },
+    {
+      "type": "text",
+      "id": "bottom_right_alt",
+      "label": "Bottom Right Picture Description (Alt Text)",
+      "info": "This is for SEO purposes"
+    },
+    {
+      "type": "url",
+      "id": "bottom_right_url",
+      "label": "Bottom Right Link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_right_text",
+      "label": "Bottom Right Visible Text",
+      "info": "This is what will actually show on the page"
     }
   ],
   "presets": [
@@ -136,50 +235,54 @@
 
 {% stylesheet %}
 
-.square {
-  max-height: 276px;
-  width: 276px;
-  overflow: hidden;
-  padding-top: 12px;
-  padding-bottom: 12px;
+.long-img {
+  margin-bottom: -14px;
 }
 
-.long-rectangle {
-  max-height: 276px;
-  width: 576px;
-  overflow: hidden;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-.tall-rectangle {
-  max-height: 576px;
-  width: 336px;
-  overflow: hidden;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-.mobile-image {
-  height: 276px;
-  width: 100%;
+.overflow-hidden {
   overflow: hidden;
 }
 
-.top-left-text {
-  position: absolute;
+@media (min-width: 576px) {
+  .spacer {
+    height: 12px;
+  }
 }
 
-.top-center-text {
+.hover-text {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  font-family: Muli;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 2.76;
+  letter-spacing: 0.9px;
+  color: #ffffff;
+  text-align: center;
 }
 
-.bottom-left-text {
-  position: absolute;
+.hover-group:hover .hover-text {
+  display: block
 }
 
-.right-text {
-  position: absolute;
+.hover-group:hover .hover-img {
+  opacity: .25;
+}
+
+.hover-group:hover .hover-background {
+  background: gray;
+}
+
+.parts-tagline {
+  font-family: Muli;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.9px;
+  color: #222222;
+  margin-bottom: 32px;
 }
 
 {% endstylesheet %}
