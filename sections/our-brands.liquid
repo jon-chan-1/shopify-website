@@ -1,24 +1,297 @@
+{% assign brand_0 = collections[section.blocks[0].settings.recommended_brand] %}
+{% assign brand_1 = collections[section.blocks[1].settings.recommended_brand] %}
+{% assign brand_2 = collections[section.blocks[2].settings.recommended_brand] %}
+{% assign brand_3 = collections[section.blocks[3].settings.recommended_brand] %}
+{% assign brand_4 = collections[section.blocks[4].settings.recommended_brand] %}
+{% assign brand_5 = collections[section.blocks[5].settings.recommended_brand] %}
+{% assign brand_6 = collections[section.blocks[6].settings.recommended_brand] %}
+{% assign brand_7 = collections[section.blocks[7].settings.recommended_brand] %}
+{% assign brand_8 = collections[section.blocks[8].settings.recommended_brand] %}
+{% assign brand_9 = collections[section.blocks[9].settings.recommended_brand] %}
+{% assign brand_10 = collections[section.blocks[10].settings.recommended_brand] %}
+{% assign brand_11 = collections[section.blocks[11].settings.recommended_brand] %}
 <div class="container mt-60">
   <h2 class="product-line d-flex homepage-header">
     THE BRANDS
     <div class="divider-line"></div>
   </h2>
   <div class="row">
-    <div class="col-sm-12 parts-tagline">
+    <div class="col-sm-12 tagline">
       Check out just a few of our curated brands.
     </div>
   </div>
+  <div class="row d-none d-sm-flex mt-36">
+    <div class="col-sm-2 py-auto gray">
+      <a href="{{ brand_0.url }}">
+        <img src="{{ brand_0.image | img_url: "master" }}" alt="{{ brand_0.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <a href="{{ brand_1.url }}">
+        <img src="{{ brand_1.image | img_url: "master" }}" alt="{{ brand_1.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <a href="{{ brand_2.url }}">
+        <img src="{{ brand_2.image | img_url: "master" }}" alt="{{ brand_2.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <a href="{{ brand_3.url }}">
+        <img src="{{ brand_3.image | img_url: "master" }}" alt="{{ brand_3.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <a href="{{ brand_4.url }}">
+        <img src="{{ brand_4.image | img_url: "master" }}" alt="{{ brand_4.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <a href="{{ brand_5.url }}">
+        <img src="{{ brand_5.image | img_url: "master" }}" alt="{{ brand_5.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
   <div class="row d-none d-sm-flex">
-    {% for block in section.blocks %}
-      {% assign brand = collections[block.settings.recommended_brand] %}
-        <div class="col-sm-2">
-          <div class="card">
-            <img src="{{ brand.image | img_url: "master" }}" alt="{{ brand.title }}" class="img-fluid">
-          </div>
-        </div>
-    {% endfor %}
+    <div class="col-sm-2 py-auto gray">
+      <p class="brand-title">
+        {{ brand_0.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <p class="brand-title">
+        {{ brand_1.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <p class="brand-title">
+        {{ brand_2.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <p class="brand-title">
+        {{ brand_3.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <p class="brand-title">
+        {{ brand_4.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <p class="brand-title">
+        {{ brand_5.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <div class="row d-none d-sm-flex">
+    <div class="col-sm-2 py-auto">
+      <a href="{{ brand_6.url }}">
+        <img src="{{ brand_6.image | img_url: "master" }}" alt="{{ brand_6.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <a href="{{ brand_7.url }}">
+        <img src="{{ brand_7.image | img_url: "master" }}" alt="{{ brand_7.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <a href="{{ brand_8.url }}">
+        <img src="{{ brand_8.image | img_url: "master" }}" alt="{{ brand_8.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <a href="{{ brand_9.url }}">
+        <img src="{{ brand_9.image | img_url: "master" }}" alt="{{ brand_9.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <a href="{{ brand_10.url }}">
+        <img src="{{ brand_10.image | img_url: "master" }}" alt="{{ brand_10.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <a href="{{ brand_11.url }}">
+        <img src="{{ brand_11.image | img_url: "master" }}" alt="{{ brand_11.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
+  <div class="row d-none d-sm-flex">
+    <div class="col-sm-2 py-auto">
+      <p class="brand-title">
+        {{ brand_6.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <p class="brand-title">
+        {{ brand_7.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <p class="brand-title">
+        {{ brand_8.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <p class="brand-title">
+        {{ brand_9.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto">
+      <p class="brand-title">
+        {{ brand_10.title | upcase }}
+      </p>
+    </div>
+    <div class="col-sm-2 py-auto gray">
+      <p class="brand-title">
+        {{ brand_11.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <!-- ================================================================================================================================= -->
+  <div class="row d-sm-none mt-36">
+    <div class="col-6 py-auto">
+      <a href="{{ brand_0.url }}">
+        <img src="{{ brand_0.image | img_url: "master" }}" alt="{{ brand_0.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-6 py-auto">
+      <a href="{{ brand_1.url }}">
+        <img src="{{ brand_1.image | img_url: "master" }}" alt="{{ brand_1.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
   </div>
   <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_0.title | upcase }}
+      </p>
+    </div>
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_1.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <a href="{{ brand_2.url }}">
+        <img src="{{ brand_2.image | img_url: "master" }}" alt="{{ brand_2.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-6 py-auto">
+      <a href="{{ brand_3.url }}">
+        <img src="{{ brand_3.image | img_url: "master" }}" alt="{{ brand_3.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_2.title | upcase }}
+      </p>
+    </div>
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_3.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <a href="{{ brand_4.url }}">
+        <img src="{{ brand_4.image | img_url: "master" }}" alt="{{ brand_4.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-6 py-auto">
+      <a href="{{ brand_5.url }}">
+        <img src="{{ brand_5.image | img_url: "master" }}" alt="{{ brand_5.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_4.title | upcase }}
+      </p>
+    </div>
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_5.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <a href="{{ brand_6.url }}">
+        <img src="{{ brand_6.image | img_url: "master" }}" alt="{{ brand_6.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-6 py-auto">
+      <a href="{{ brand_7.url }}">
+        <img src="{{ brand_7.image | img_url: "master" }}" alt="{{ brand_7.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_6.title | upcase }}
+      </p>
+    </div>
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_7.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <a href="{{ brand_8.url }}">
+        <img src="{{ brand_8.image | img_url: "master" }}" alt="{{ brand_8.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-6 py-auto">
+      <a href="{{ brand_9.url }}">
+        <img src="{{ brand_9.image | img_url: "master" }}" alt="{{ brand_9.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_8.title | upcase }}
+      </p>
+    </div>
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_9.title | upcase }}
+      </p>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <a href="{{ brand_10.url }}">
+        <img src="{{ brand_10.image | img_url: "master" }}" alt="{{ brand_10.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+    <div class="col-6 py-auto">
+      <a href="{{ brand_11.url }}">
+        <img src="{{ brand_11.image | img_url: "master" }}" alt="{{ brand_11.title | upcase }}" class="img-fluid brand-image">
+      </a>
+    </div>
+  </div>
+  <div class="row d-sm-none">
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_10.title | upcase }}
+      </p>
+    </div>
+    <div class="col-6 py-auto">
+      <p class="brand-title">
+        {{ brand_11.title | upcase }}
+      </p>
+    </div>
   </div>
 </div>
 
@@ -52,6 +325,26 @@
 
 {% stylesheet %}
 
+.brand-title {
+ font-family: Prompt;
+ font-size: 10px;
+ font-weight: bold;
+ letter-spacing: 0.5px;
+ color: #000000;
+ text-align: center;
+ margin-top: 20px;
+}
+
+.brand-image {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gray {
+  background-color: #f6f6f6;
+}
 {% endstylesheet %}
 
 {% javascript %}

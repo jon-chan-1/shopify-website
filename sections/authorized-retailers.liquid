@@ -1,8 +1,16 @@
-<div class="container">
-  <h2 class="homepage-header">Authorized by</h2>
+<div class="container mt-60">
+  <h2 class="product-line d-flex homepage-header">
+    THE PARTNERSHIPS
+    <div class="divider-line"></div>
+  </h2>
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
+    <div class="col-sm-12 tagline">
+      In partnership with these businesses, we perform services in store.
+    </div>
+  </div>
+  <div class="row mt-36">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
       <div class="row">
         {% for block in section.blocks %}
           {%- capture col_size -%}
@@ -20,7 +28,7 @@
         {% endfor %}
       </div>
     </div>
-    <div class="col-1"></div>
+    <div class="col-sm-1"></div>
   </div>
 </div>
 
