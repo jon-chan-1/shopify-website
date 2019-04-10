@@ -1,0 +1,90 @@
+<div class="container mt-60">
+  <h2 class="product-line d-flex homepage-header">
+    THE SERVICE
+    <div class="divider-line"></div>
+  </h2>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 class="service-tagline">Based in Queens, but shipping nationwide.</h3>
+      <br>
+      <p class="service-text">
+        Our auto parts are sourced from curated vendors all over the world. Whether you want a new set of wheels, suspension for your car, or a new engine you can purchase from us. For parts that are custom, we can reach out to our partners to specially order them.
+      </p>
+      <br>
+      <a href="/pages/contact-us">
+        <a class="btn btn-lg service-button" href="/pages/contact-us" role="button">EXPLORE</a>
+      </a>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7">
+      <img class="img-fluid" src="{{ section.settings.service_image | img_url: "master" }}" alt="cutting and welding exhaust">
+    </div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Service",
+  "class": "service-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "service_image",
+      "label": "Service Image",
+      "info": "Recommended 1600px x 1000px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service",
+      "category": "Service"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+.service-tagline {
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+  color: #222222
+}
+
+.service-text {
+  font-family: Muli;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  color: #000000;
+}
+
+.service-button {
+  border-radius: 0px;
+  background-color: #ffffff;
+  color: #363636;
+  font-family: prompt;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-align: center;
+  border: 1px solid #363636;
+  width: 200px;
+}
+
+.service-button:hover {
+  background-color: #b90b00;
+}
+
+@media (max-width: 575.98px) {
+  .service-button {
+    width: 100%;
+  }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

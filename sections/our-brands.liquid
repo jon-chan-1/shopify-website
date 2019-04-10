@@ -1,96 +1,24 @@
-<div class="container">
-  <h2 class="homepage-header">Our Brands</h2>
-  <div class="row d-none d-sm-flex">
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_1 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_1 | img_url: "master" }}" alt="{{ settings.alt_text_1 }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_2 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_2 | img_url: "master" }}" alt="{{ settings.alt_text_2 }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_3 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_3 | img_url: "master" }}" alt="{{ settings.alt_text_3 }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_4 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_4 | img_url: "master" }}" alt="{{ settings.alt_text_4 }}"/>
-      </a>
+<div class="container mt-60">
+  <h2 class="product-line d-flex homepage-header">
+    THE BRANDS
+    <div class="divider-line"></div>
+  </h2>
+  <div class="row">
+    <div class="col-sm-12 parts-tagline">
+      Check out just a few of our curated brands.
     </div>
   </div>
   <div class="row d-none d-sm-flex">
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_5 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_5 | img_url: "master" }}" alt="{{ settings.alt_text_5 }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_6 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_6 | img_url: "master" }}" alt="{{ settings.alt_text_6 }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_7 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_7 | img_url: "master" }}" alt="{{ settings.alt_text_7 }}"/>
-      </a>
-    </div>
-    <div class="col-sm-3 brand-tile">
-      <a href="{{ settings.brand_url_8 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_8 | img_url: "master" }}" alt="{{ settings.alt_text_8 }}"/>
-      </a>
-    </div>
+    {% for block in section.blocks %}
+      {% assign brand = collections[block.settings.recommended_brand] %}
+        <div class="col-sm-2">
+          <div class="card">
+            <img src="{{ brand.image | img_url: "master" }}" alt="{{ brand.title }}" class="img-fluid">
+          </div>
+        </div>
+    {% endfor %}
   </div>
   <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_1 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_1 | img_url: "master" }}" alt="{{ settings.alt_text_1 }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_2 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_2 | img_url: "master" }}" alt="{{ settings.alt_text_2 }}"/>
-      </a>
-    </div>
-  </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_3 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_3 | img_url: "master" }}" alt="{{ settings.alt_text_3 }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_4 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_4 | img_url: "master" }}" alt="{{ settings.alt_text_4 }}"/>
-      </a>
-    </div>
-  </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_5 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_5 | img_url: "master" }}" alt="{{ settings.alt_text_5 }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_6 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_6 | img_url: "master" }}" alt="{{ settings.alt_text_6 }}"/>
-      </a>
-    </div>
-  </div>
-  <div class="row d-sm-none">
-    <div class="col-6">
-      <a href="{{ settings.brand_url_7 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_7 | img_url: "master" }}" alt="{{ settings.alt_text_7 }}"/>
-      </a>
-    </div>
-    <div class="col-6">
-      <a href="{{ settings.brand_url_8 }}" class="brand-link">
-        <img class="img-fluid brand-image" src="{{ settings.brand_image_8 | img_url: "master" }}" alt="{{ settings.alt_text_8 }}"/>
-      </a>
-    </div>
   </div>
 </div>
 
@@ -99,6 +27,20 @@
 {
   "name": "Our Brands",
   "class": "brands-section",
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Recommended Brand",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "recommended_brand",
+          "label": "Recommended Brand"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Our Brands",
@@ -109,22 +51,6 @@
 {% endschema %}
 
 {% stylesheet %}
-.brand-tile > a > .brand-image {
-  width: 50%;
-}
-
-.brand-tile {
-  height: 220px;
-  display: flex;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #d8d8d8;
-}
-
-.brand-link {
-  text-align: center;
-  align-self: center;
-}
 
 {% endstylesheet %}
 
