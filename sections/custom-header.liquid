@@ -1,8 +1,5 @@
-<nav class="navbar navbar-expand-lg custom-header-navbar">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+<nav class="navbar custom-header-navbar navbar-expand">
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav">
       <li id="nav-spacer"></li>
       <li class="nav-item dropdown nav-link custom-nav-link">
@@ -68,6 +65,137 @@
           </li>
         {% endif %}
       {% endfor %}
+    </ul>
+  </div>
+</nav>
+<!-- ============================================================================================================================================ -->
+<nav class="navbar custom-mobile-navbar">
+  <div class="collapse navbar-collapse" id="shop-nav">
+    <button class="float-right btn btn-link" type="button" data-toggle="collapse" data-target="#shop-nav" aria-controls="shop-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-times"></i>
+    </button>
+    <ul class="navbar-nav">
+      <li class="nav-item custom-nav-link mobile-nav-link"><br><br></li>
+      <li class="nav-item custom-nav-link mobile-nav-link">
+        <button class="btn btn-link mobile-parent-button" type="button" data-toggle="collapse" data-target="#by-brand-link" aria-controls="shop-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="float-left">
+            BY BRAND
+          </span>
+          <span class="float-right">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="by-brand-link">
+          <ul class="navbar-nav">
+          {% for block in section.blocks %}
+            {% if block.type == "featured-brands" %}
+              {% assign brand_collection = collections[block.settings.featured_brand] %}
+              <li class="nav-item custom-nav-link mobile-nav-link">
+                <a href="{{ brand_collection.url }}">{{ brand_collection.title | upcase }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+              <li class="nav-item custom-nav-link mobile-nav-link">
+                <a href="/pages/by-brand">SEE ALL</a>
+              </li>
+          </ul>
+        </div>
+      </li>
+      {% for block in section.blocks %}
+        {% if block.type == "collection" %}
+          {% assign parent_collection = collections[block.settings.parent-collection] %}
+          {% assign sub_collection_1 = collections[block.settings.sub-collection-1] %}
+          {% assign sub_collection_2 = collections[block.settings.sub-collection-2] %}
+          {% assign sub_collection_3 = collections[block.settings.sub-collection-3] %}
+          {% assign sub_collection_4 = collections[block.settings.sub-collection-4] %}
+          {% assign sub_collection_5 = collections[block.settings.sub-collection-5] %}
+          {% assign sub_collection_6 = collections[block.settings.sub-collection-6] %}
+          {% assign sub_collection_7 = collections[block.settings.sub-collection-7] %}
+          {% assign sub_collection_8 = collections[block.settings.sub-collection-8] %}
+          {% assign sub_collection_9 = collections[block.settings.sub-collection-9] %}
+          {% assign sub_collection_10 = collections[block.settings.sub-collection-10] %}
+          <li class="nav-item custom-nav-link mobile-nav-link">
+            <button class="btn btn-link mobile-parent-button" type="button" data-toggle="collapse" data-target="#collection-{{ forloop.index0 }}" aria-controls="shop-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="float-left">
+                {{ parent_collection.title | upcase }}
+              </span>
+              <span class="float-right">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+            </button>
+            <div class="collapse navbar-collapse" id="collection-{{ forloop.index0 }}">
+              <ul class="navbar-nav">
+                {% if sub_collection_1.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_2.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_2.url }}">{{ sub_collection_2.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_3.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_3.url }}">{{ sub_collection_3.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_4.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_4.url }}">{{ sub_collection_4.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_5.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_5.url }}">{{ sub_collection_5.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_6.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_6.url }}">{{ sub_collection_6.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_7.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_7.url }}">{{ sub_collection_7.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_8.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_8.url }}">{{ sub_collection_8.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_9.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_9.url }}">{{ sub_collection_9.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                {% if sub_collection_10.id != "" %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
+                  </li>
+                {% endif %}
+                  <li class="nav-item custom-nav-link mobile-nav-link">
+                    <a href="{{ parent_collection.url }}">SEE ALL</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+        {% endif %}
+      {% endfor %}
+      <li class="nav-item custom-nav-link mobile-nav-link"><hr></li>
+      <li class="nav-item custom-nav-link mobile-nav-link">
+        <form action="/search" method="get" role="search" class="my-auto">
+          <input type="hidden" name="type" value="product">
+          <span>
+            <i class="fas fa-search"></i>
+            <input type="search" name="q" aria-label="Search" id="mobile-search-form" placeholder="SEARCH">
+          </span>
+        </form>
+      </li>
+      <li class="nav-item custom-nav-link mobile-nav-link">
+        <a href="/pages/contact-us">VISIT OUR STORE</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -164,9 +292,20 @@
     margin-top: -24px;
   }
 
-  #nav-spacer {
-    margin-left: 88px;
+  .custom-mobile-navbar {
+    padding: 0px;
+    display: none;
   }
+}
+
+@media (max-width: 991.98px) {
+  .custom-header-navbar {
+    display: none;
+  }
+}
+
+#nav-spacer {
+  margin-left: 88px;
 }
 
 .custom-nav-link {
@@ -177,7 +316,7 @@
   color: #505d68;
 }
 
-.custom-header-navbar {
+.custom-header-navbar, .custom-mobile-navbar {
   padding: 0px;
   margin-top: 60px;
 }
@@ -188,6 +327,23 @@
   padding-top: 17px;
 }
 
+.mobile-nav-link {
+  margin-left: 12px;
+  margin-bottom: 12px;
+}
+
+.mobile-parent-button {
+  width: 100%;
+}
+
+.fa-times {
+  font-size: 18px;
+}
+
+#mobile-search-form {
+  width: 50%;
+  display: inline-block;
+}
 
 {% endstylesheet %}
 

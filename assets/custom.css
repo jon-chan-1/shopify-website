@@ -100,3 +100,13 @@ ol {
   letter-spacing: 1px;
   color: #505d68;
 }
+
+.fa-bars {
+  color: white;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 0px;
+  }
+}

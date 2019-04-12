@@ -1,5 +1,12 @@
 <nav class="navbar red fixed-top" id="top-nav">
-  <a href="/" id="home-link" class="mr-auto">
+  <button class="navbar-toggler top-header-toggler" type="button" data-toggle="collapse" data-target="#shop-nav" aria-controls="shop-nav" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  <a href="/" id="home-link" class="home-link-desktop mr-auto">
+    <img src="{{ 'crown-logo.png' | asset_img_url: 'master' }}" alt="crown speedlab" id="logo">
+    <img src="{{ 'crown-speedlab-text-logo.png' | asset_img_url: 'master' }}" alt="crown speedlab" id="text-logo">
+  </a>
+  <a href="/" class="home-link-mobile mx-auto">
     <img src="{{ 'crown-logo.png' | asset_img_url: 'master' }}" alt="crown speedlab" id="logo">
     <img src="{{ 'crown-speedlab-text-logo.png' | asset_img_url: 'master' }}" alt="crown speedlab" id="text-logo">
   </a>
@@ -78,34 +85,68 @@ input {
 	cursor: auto;
 }
 
-@media (min-width: 992px) {
-  #home-link {
-    margin-left: 96px;
-  }
+#text-logo {
+  padding-left: 2px;
+}
 
-  #text-logo {
-    padding-left: 2px;
-  }
+.home-link-desktop {
+  margin-left: 96px;
+}
 
-  #phone {
-    padding-right: 106px;
+#phone {
+  padding-right: 106px;
+}
+
+#contact-us {
+  padding-right: 22px;
+}
+
+#dropdown {
+  padding-right: 21px;
+}
+
+#cart {
+  padding-right: 12px;
+}
+
+#search-icon {
+  padding-right: 14px;
+}
+
+@media (max-width: 991.98px) {
+  #search-icon {
+    display: none;
   }
 
   #contact-us {
-    padding-right: 22px;
+    display: none;
   }
 
-  #dropdown {
-    padding-right: 21px;
+  #phone {
+    display: none;
   }
 
   #cart {
-    padding-right: 12px;
+    padding-right: 24px;
   }
 
-  #search-icon {
-    padding-right: 14px;
+  .home-link-desktop {
+    display: none;
   }
+}
+
+@media (min-width: 992px) {
+  .home-link-mobile {
+    display: none;
+  }
+
+  .top-header-toggler {
+    display: none;
+  }
+}
+
+.top-header-toggler {
+  margin-left: 6px;
 }
 
 #dropdown {
