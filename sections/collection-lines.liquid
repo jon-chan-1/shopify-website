@@ -7,17 +7,73 @@
   <div class="row">
     <div class="col-12">
       <h1 class="collection-title">
-        {{ collection.title }}
+        {{ collection.title | upcase }}
       </h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="sidebar-filter active">
+  <div class="row d-md-none justify-content-center">
+    <button class="btn mobile-sort-button" type="button" data-toggle="modal" data-target="#sidebar-filter-mobile">
+      <span class="float-left">
+        Filters
+      </span>
+      <span class="float-right">
+        <i class="fas fa-chevron-down"></i>
+      </span>
+    </button>
+    <button class="btn mobile-sort-button" type="button" data-toggle="modal" data-target="#sort-by-mobile">
+      <span class="float-left">
+        Sort By
+      </span>
+      <span class="float-right">
+        <i class="fas fa-chevron-down"></i>
+      </span>
+    </button>
+    <div class="modal fade" id="sidebar-filter-mobile" tabindex="-1" role="dialog" aria-labelledby="sidebar-filter-mobile" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="sidebar-filter-mobile-title">Filters</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="sidebar-filter active sidebar-filter-mobile">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-sm-10">
-      <div class="row">
+    <div class="modal fade" id="sort-by-mobile" tabindex="-1" role="dialog" aria-labelledby="sort-by-mobile" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="sort-by-mobile-title">Filters</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=manual">Featured</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=best-selling">Best Selling</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=title-ascending">Alphabetically, A-Z</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=title-descending">Alphabetically, Z-A</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=price-ascending">Price, low to high</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=price-descending">Price, high to low</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=created-descending">Date, new to old</a>
+            <a class="dropdown-item" href="{{ request.path }}?sort_by=created-ascending">Date, old to new</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="sidebar-filter active sidebar-filter-desktop">
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="row d-none d-md-flex">
         <div class="col-12">
           <div class="float-right">
             {% include 'collection-sorting' %}
@@ -113,6 +169,13 @@
 
 .collection-title {
   text-align: center;
+  font-family: Prompt;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 2.67;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #505d68;
 }
 
 #paginate {
@@ -157,6 +220,49 @@
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
+}
+
+@media (max-width: 767.98px) {
+  .card.product > a > img.product-grid {
+    height: 28vw;
+  }
+
+  .sidebar-filter-desktop {
+    display: none;
+  }
+}
+
+.product-tile {
+  height: 100%;
+}
+
+.mobile-sort-button {
+  background-color: white;
+  color: #505d68;
+  font-family: Muli;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 0px;
+  border: 1px solid #979797;
+  width: 30%;
+}
+
+.mobile-sort-button:hover {
+  background-color: #b90b00;
+}
+
+.product-line-title {
+  font-family: Muli;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 2;
+  letter-spacing: 1.5px;
+  color: #b90b00;
+  margin-bottom: 0px;
+}
+
+.product-row-desktop {
+  margin-bottom: 12px;
 }
 
 {% endstylesheet %}
@@ -233,23 +339,26 @@ function filterArray(table) {
 };
 
 function buildFilters(filters) {
-  var sidebar = $('.sidebar-filter')[0];
-  for (var filterGroup in filters) {
-    $(newFilterGroup(filterGroup)).appendTo(sidebar);
+  [0, 1].forEach(function(i) {
+      var sidebar = $('.sidebar-filter')[i];
+      for (var filterGroup in filters) {
+        $(newFilterGroup(filterGroup)).appendTo(sidebar);
 
-    var dropdownMenu = $('.dropdown-menu-' + formatLine(filterGroup) + ' > ul')[0];
+        var dropdownMenu = $('.dropdown-menu-' + formatLine(filterGroup) + ' > ul')[i];
 
-    var options = filters[filterGroup];
-    for (var index in options) {
-      var filter = options[index];
-      var isActive = filter.active == "true" ? "checked" : "";
+        var options = filters[filterGroup];
+        for (var index in options) {
+          var filter = options[index];
+          var isActive = filter.active == "true" ? "checked" : "";
 
-      if (isActive == "checked") {
-        $('.filter-button-' + formatLine(filterGroup) + ':first').addClass("filter-active")
+          if (isActive == "checked") {
+            $('.filter-button-' + formatLine(filterGroup) + ':first').addClass("filter-active")
+          };
+          $(newFilterItem(filter.href, filter.tag, isActive)).appendTo(dropdownMenu);
+        };
       };
-      $(newFilterItem(filter.href, filter.tag, isActive)).appendTo(dropdownMenu);
-    };
-  };
+    }
+  )
 }
 
 function newFilterGroup(filterGroup) {
@@ -295,6 +404,7 @@ function loopProductLine(line) {
 
     for (var product in productLine) {
       buildProductTile(productLine[product], formatLine(title) + "-" + productIndex);
+      buildProductTile(productLine[product], formatLine(title) + "-mobile-" + productIndex);
       productIndex += 1;
     };
   };
@@ -303,20 +413,24 @@ function loopProductLine(line) {
 function buildLineTitle(title) {
   var productGrid = $('#product-grid');
 
-  $('<div class="product-line d-flex"><h4>' + title + '</h4><div class="divider-line"></div></div>').appendTo(productGrid);
+  $('<div class="product-line d-flex mt-18"><h4 class="product-line-title">' + title + '</h4><div class="divider-line"></div></div>').appendTo(productGrid);
 };
 
 function buildRows(count, line) {
   var rowsCount = Math.ceil(count/4);
+  var mobileRowsCount = Math.ceil(count/2);
   var productCount = 0;
   var productGrid = $('#product-grid');
   for (var i=0; i < rowsCount; i++) {
     $(newRow(i, line)).appendTo(productGrid);
   };
+  for (var i=0; i < mobileRowsCount; i++) {
+    $(newMobileRow(i, line)).appendTo(productGrid);
+  };
 };
 
 function newRow(n, line) {
-  var row = '<div class="row">'
+  var row = '<div class="row d-none d-md-flex product-row-desktop">'
   for (var i = 0; i < 4; i++) {
     row += newTile(formatLine(line) + "-" + (n*4 + i))
   };
@@ -329,7 +443,7 @@ function formatLine(line) {
 };
 
 function newTile(id) {
-  return '<div class="col-md-3"><div id="' + id + '"></div></div>'
+  return '<div class="col-md-3"><div id="' + id + '"class="product-tile"></div></div>'
 };
 
 function buildProductTile(product, id) {
@@ -339,16 +453,29 @@ function buildProductTile(product, id) {
   return
 };
 
+function newMobileRow(n, line) {
+  var row = '<div class="row d-md-none">';
+  for (var i = 0; i < 2; i++) {
+    row += newMobileTile(formatLine(line) + "-mobile-" + (n*2 + i))
+  };
+
+  return row + '</div>'
+};
+
+function newMobileTile(id) {
+  return '<div class="col-6"><div id="' + id + '"></div></div>'
+};
+
 function newCard(product) {
   var card = `
     <div class="card product">
       <a href="` + product.url + `">
-        <img class="card-img-top img-fluid" src="` + product.image_url + `" alt="Card image cap">
+        <img class="card-img-top img-fluid product-grid" src="` + product.image_url + `" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">` + product.title + `</p>
+          <p class="card-text">` + product.price + `</p>
+        </div>
       </a>
-      <div class="card-body">
-        <p class="card-text">` + product.title + `</p>
-        <p class="card-text">` + product.price + `</p>
-      </div>
     </div>
   `;
   return card;
