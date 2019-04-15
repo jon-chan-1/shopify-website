@@ -20,8 +20,8 @@
             <div class="card border-0">
               <img class="card-img-top authorized-logo" src="{{ block.settings.retailer-image | img_url: "master" }}" alt="Card image cap">
               <div class="card-body authorized-text">
-                <h4 class="card-text">{{ block.settings.retailer-title }}</h4>
-                <p class="card-text">{{ block.settings.retailer-description }}</p>
+                <h4 class="card-text align-left">{{ block.settings.retailer-title }}</h4>
+                <p class="card-text align-left">{{ block.settings.retailer-description }}</p>
               </div>
             </div>
           </div>
@@ -100,6 +100,10 @@
   line-height: 1.5;
   text-align: center;
   color: #a1aeb7;
+}
+
+.authorized-text > .align-left {
+  text-align: left;
 }
 
 {% endstylesheet %}

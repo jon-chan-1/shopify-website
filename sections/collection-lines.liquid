@@ -413,7 +413,7 @@ function loopProductLine(line) {
 function buildLineTitle(title) {
   var productGrid = $('#product-grid');
 
-  $('<div class="product-line d-flex mt-18"><h4 class="product-line-title">' + title + '</h4><div class="divider-line"></div></div>').appendTo(productGrid);
+  $('<div class="product-line d-flex mt-18 mb-18"><h4 class="product-line-title">' + title + '</h4><div class="divider-line"></div></div>').appendTo(productGrid);
 };
 
 function buildRows(count, line) {
@@ -443,7 +443,7 @@ function formatLine(line) {
 };
 
 function newTile(id) {
-  return '<div class="col-md-3"><div id="' + id + '"class="product-tile"></div></div>'
+  return '<div class="col-md-3 px-6"><div id="' + id + '"class="product-tile"></div></div>'
 };
 
 function buildProductTile(product, id) {

@@ -6,7 +6,7 @@
 <div class="container">
   <div id="ProductSection" data-section-id="{{ section.id }}" data-section-type="product-template" data-zoom-toggle="zoom-in" data-zoom-enabled="{{ section.settings.product_image_zoom_enable }}" data-related-enabled="{{ section.settings.product_related_enable }}" data-social-sharing="{{ section.settings.social_sharing }}" data-show-compare-at-price="{{ section.settings.product_show_compare_at_price }}" data-stock="{{ section.settings.product_quantity_message }}" data-incoming-transfer="{{ section.settings.product_incoming_message }}" data-ajax-cart-method="{{ settings.ajax_cart_method }}">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 mb-12">
         <div class="product-line d-flex">
           {% include 'breadcrumb' %}
           <div class="divider-line"></div>
@@ -133,12 +133,12 @@
                 <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-selector">
               {% endif %}
 
-              <div class="payment-buttons payment-buttons--{{ section.settings.add_to_cart_button_size }}">
-                <button type="submit" name="add" id="addToCart-{{ section.id }}" class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}">
-                  <span class="icon icon-cart"></span>
-                  <span id="addToCartText-{{ section.id }}">{{ 'products.product.add_to_cart' }}</span>
-                </button>
-              </div>
+              <button type="submit" name="add" id="addToCart-{{ section.id }}" class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}">
+                <span>
+                  <img src="{{ 'icon.png' | asset_img_url: 'master' }}" alt="shopping cart icon" id="cart">
+                </span>
+                <span id="addToCartText-{{ section.id }}">{{ 'products.product.add_to_cart' }}</span>
+              </button>
             {% endif %}
           {% endform %}
         </div>
@@ -266,6 +266,34 @@
 
 .addToCartForm {
   margin-top: 74px;
+}
+
+@media (min-width: 769px) {
+  #quantity {
+    width: 40%;
+  }
+
+  .btn--add-to-cart {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  #quantity {
+    width: 100%;
+  }
+
+  .btn--add-to-cart {
+    width: 100%;
+  }
+}
+
+.btn--add-to-cart {
+  background-color: #b90b00;
+}
+
+.btn--add-to-cart:hover {
+  background-color: #b90b00;
 }
 
 {% endstylesheet %}

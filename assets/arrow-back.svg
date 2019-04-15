@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Left</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6.52875,5.02875 L6.52875,5.02875 C6.23663621,5.32086379 6.23637802,5.79439413 6.52817308,6.08682629 L9.435,9 L6.52817308,11.9131737 C6.23637802,12.2056059 6.23663621,12.6791362 6.52875,12.97125 L6.52875,12.97125 C6.82077056,13.2632706 7.29422944,13.2632706 7.58625,12.97125 L11.5575,9 L7.58625,5.02875 C7.29422944,4.73672944 6.82077056,4.73672944 6.52875,5.02875 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="home-page" transform="translate(-75.000000, -1542.000000)">
+            <g id="Atoms-/-Elements-/-button-/-arrow_back" transform="translate(76.000000, 1543.000000)">
+                <circle id="Oval" stroke="#B90B00" stroke-width="0.75" cx="9.375" cy="9.375" r="9.375"></circle>
+                <g id="Atoms-/-icons-/-System-/-Chevron_left" fill="#D8D8D8" fill-rule="evenodd" transform="translate(0.000000, 0.750000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#C2D1D9" transform="translate(8.778750, 9.000000) scale(-1, 1) translate(-8.778750, -9.000000) " xlink:href="#path-1"></use>
+                    <g id="Atoms-/-Colors-/-Gray-#2" fill="none" mask="url(#mask-2)">
+                        <rect id="Atoms-/-Colors-/-Black" fill="#D0021B" x="0" y="0" width="17.8676471" height="17.8676471"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

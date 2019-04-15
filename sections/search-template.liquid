@@ -1,0 +1,316 @@
+{% assign grid_results = true %}
+
+<div class="container">
+  <div class="row">
+      {% if search.performed %}
+
+        {% paginate search.results by 50 %}
+
+          {% if search.results_count == 0 %}
+
+            <h1 class="h2 text-center">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+            {% include 'search-bar' %}
+
+          {% else %}
+          <div
+          <div id="product-grid">
+          </div>
+          <div class="product-data mx-auto">
+            <table style="visibility: hidden;display: none;">
+              <tr>
+                <th>link</th>
+                <th>image</th>
+                <th>title</th>
+                <th>compare_at_price</th>
+                <th>price</th>
+                <th>product_line</th>
+                <th>id</th>
+              </tr>
+            {% for product in search.results %}
+              <tr>
+                <td>{{ product.url | within: collection }}</td>
+                <td>{{ product | img_url: '500x500' }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.compare_at_price | money}}</td>
+                <td>From {{ product.price_min | money }}</td>
+                <td>{{ product.vendor }}</td>
+                <td>{{ product.id }}</td>
+              </tr>
+            {% endfor %}
+            </table>
+          {% endif %}
+
+          {% if paginate.pages > 1 %}
+            {% include 'pagination-custom' %}
+          {% endif %}
+
+        {% endpaginate %}
+
+      {% else %}
+
+        {% comment %}
+          If search.performed is false, someone either accessed the page without the q parameter, or it was blank.
+        {% endcomment %}
+        <h1 class="text-center h2">{{ 'general.search.title' | t }}</h1>
+        {% include 'search-bar' %}
+
+      {% endif %}
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": {
+    "de": "Suchen",
+    "en": "Search",
+    "es": "Buscar",
+    "fr": "Rechercher",
+    "it": "Cerca",
+    "ja": "検索",
+    "pt-BR": "Pesquisar"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product_show_compare_at_price",
+      "label": {
+        "de": "Vergleich zum Preis anzeigen",
+        "en": "Show compare at price",
+        "es": "Mostrar precio de comparación",
+        "fr": "Afficher le prix normal",
+        "it": "Mostra Confronta al prezzo",
+        "ja": "価格比較を表示する",
+        "pt-BR": "Exibir comparação de preço"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "product_show_saved_amount",
+      "label": {
+        "de": "Gesparten Betrag anzeigen",
+        "en": "Show saved amount",
+        "es": "Mostrar monto ahorrado",
+        "fr": "Afficher le montant économisé",
+        "it": "Mostra importo risparmiato",
+        "ja": "保存された金額を表示",
+        "pt-BR": "Exibir valor salvo"
+      },
+      "default": true
+    }
+  ]
+}
+{% endschema %}
+
+{% javascript %}
+$(document).ready(function(){
+  var productTable = $(".product-data table tbody")[0].children;
+  var productLines = productArray(productTable);
+
+  loopProductLines(productLines);
+});
+
+function productArray(table) {
+  var i;
+  var hash = {};
+
+  for (i = 1; i < table.length; i++) {
+    var row = table[i].children;
+    var url = row[0].innerHTML;
+    var image_url = row[1].innerHTML;
+    var title = row[2].innerHTML;
+    var sale_price = row[3].innerHTML;
+    var price = row[4].innerHTML;
+    var line = row[5].innerHTML;
+    var id = row[6].innerHTML;
+
+    if (!hash[line]) hash[line] = new Array;
+    hash[line].push({
+      url: url,
+      image_url: image_url,
+      title: title,
+      sale_price: sale_price,
+      price: price,
+      id: id
+    });
+  };
+
+  var array = [];
+  for (var key in hash) {
+    array.push({ [key]: hash[key] })
+  };
+
+  return array;
+};
+
+function filterArray(table) {
+  var i;
+  var hash = {};
+
+  for (i = 1; i < table.length; i++) {
+    var row = table[i].children;
+    var tag = row[0].innerHTML;
+    var link = row[1].innerHTML;
+    var hrefIndex = link.indexOf("href=");
+    var href = link.slice(hrefIndex, link.indexOf("\"", hrefIndex + 8) + 1);
+    var active = row[2].innerHTML;
+    var split = tag.split("|");
+
+    if (split.length > 1) {
+      if (!hash[split[0]]) hash[split[0]] = new Array;
+      hash[split[0]].push({
+        tag: split[1],
+        href: href,
+        active: active
+      });
+    };
+  };
+
+  return hash;
+};
+
+function buildFilters(filters) {
+  [0, 1].forEach(function(i) {
+      var sidebar = $('.sidebar-filter')[i];
+      for (var filterGroup in filters) {
+        $(newFilterGroup(filterGroup)).appendTo(sidebar);
+
+        var dropdownMenu = $('.dropdown-menu-' + formatLine(filterGroup) + ' > ul')[i];
+
+        var options = filters[filterGroup];
+        for (var index in options) {
+          var filter = options[index];
+          var isActive = filter.active == "true" ? "checked" : "";
+
+          if (isActive == "checked") {
+            $('.filter-button-' + formatLine(filterGroup) + ':first').addClass("filter-active")
+          };
+          $(newFilterItem(filter.href, filter.tag, isActive)).appendTo(dropdownMenu);
+        };
+      };
+    }
+  )
+}
+
+function newFilterGroup(filterGroup) {
+  return '\
+<div class="input-group">\
+  <div class="input-group-append">\
+    <button class="btn btn-outline-secondary dropdown-toggle filter-button filter-button-' + formatLine(filterGroup) + '" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + filterGroup + '</button>\
+    <div class="dropdown-menu scrollable-menu dropdown-menu-' + formatLine(filterGroup) + '">\
+      <ul/>\
+    </div>\
+  </div>\
+</div>\
+  '
+};
+
+function newFilterItem(link, tag, isActive) {
+  return '\
+<li>\
+  <a '+ link + ' class="dropdown-item">\
+    <input type="checkbox" onclick="window.location=\'' + link.slice(link.indexOf('"')+1, link.length-1) + '\';" ' + isActive + '>\
+    ' + tag + '\
+  </a>\
+</li>\
+  '
+};
+
+function loopProductLines(productLines) {
+  for (var productLineIndex in productLines) {
+    var line = productLines[productLineIndex];
+    loopProductLine(line);
+  };
+};
+
+function loopProductLine(line) {
+  for (var title in line) {
+    var productLine = line[title];
+
+    buildLineTitle(title);
+    var count = productLine.length;
+    buildRows(count, title);
+
+    var productIndex = 0;
+
+    for (var product in productLine) {
+      buildProductTile(productLine[product], formatLine(title) + "-" + productIndex);
+      buildProductTile(productLine[product], formatLine(title) + "-mobile-" + productIndex);
+      productIndex += 1;
+    };
+  };
+};
+
+function buildLineTitle(title) {
+  var productGrid = $('#product-grid');
+
+  $('<div class="product-line d-flex mt-18 mb-18"><h4 class="product-line-title">' + title + '</h4><div class="divider-line"></div></div>').appendTo(productGrid);
+};
+
+function buildRows(count, line) {
+  var rowsCount = Math.ceil(count/4);
+  var mobileRowsCount = Math.ceil(count/2);
+  var productCount = 0;
+  var productGrid = $('#product-grid');
+  for (var i=0; i < rowsCount; i++) {
+    $(newRow(i, line)).appendTo(productGrid);
+  };
+  for (var i=0; i < mobileRowsCount; i++) {
+    $(newMobileRow(i, line)).appendTo(productGrid);
+  };
+};
+
+function newRow(n, line) {
+  var row = '<div class="row d-none d-md-flex product-row-desktop">'
+  for (var i = 0; i < 4; i++) {
+    row += newTile(formatLine(line) + "-" + (n*4 + i))
+  };
+
+  return row + '</div>'
+};
+
+function formatLine(line) {
+  return line.replace(/ /g, "");
+};
+
+function newTile(id) {
+  return '<div class="col-md-3 px-6"><div id="' + id + '"class="product-tile"></div></div>'
+};
+
+function buildProductTile(product, id) {
+  var productDiv = $("#"+id);
+  $(newCard(product)).appendTo(productDiv);
+
+  return
+};
+
+function newMobileRow(n, line) {
+  var row = '<div class="row d-md-none">';
+  for (var i = 0; i < 2; i++) {
+    row += newMobileTile(formatLine(line) + "-mobile-" + (n*2 + i))
+  };
+
+  return row + '</div>'
+};
+
+function newMobileTile(id) {
+  return '<div class="col-6"><div id="' + id + '"></div></div>'
+};
+
+function newCard(product) {
+  var card = `
+    <div class="card product">
+      <a href="` + product.url + `">
+        <img class="card-img-top img-fluid product-grid" src="` + product.image_url + `" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">` + product.title + `</p>
+          <p class="card-text">` + product.price + `</p>
+        </div>
+      </a>
+    </div>
+  `;
+  return card;
+};
+{% endjavascript %}

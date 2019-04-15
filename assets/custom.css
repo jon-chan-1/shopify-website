@@ -15,6 +15,10 @@
   background-color: transparent;
 }
 
+#breadcrumb-ol {
+  margin-bottom: 0px;
+}
+
 .breadcrumb > li, .breadcrumb > li > a {
   font-family: Muli;
   font-size: 20px;
@@ -52,8 +56,9 @@
 
 .card.product > a > img {
   width: 100%;
-  height: 7vw;
+  height: 9vw;
   object-fit: cover;
+  padding: 12px;
 }
 
 .card.product {
@@ -66,11 +71,15 @@
   border: none;
 }
 
+.card-body {
+  padding-top: 48px;
+}
+
 .card-text {
   font-family: Muli;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
-  line-height: 1.5;
+  line-height: 18px;
   letter-spacing: 1px;
   text-align: center;
   color: #505d68;
@@ -104,6 +113,19 @@ ol {
   margin-top: 60px;
 }
 
+.mb-12 {
+  margin-bottom: 12px;
+}
+
+.mb-18 {
+  margin-bottom: 18px;
+}
+
+.px-6 {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .tagline {
   font-family: Muli;
   font-size: 16px;
@@ -125,7 +147,7 @@ ol {
 
 @media (min-width: 992px) {
   body {
-    margin-top: 130px;
+    margin-top: 112px;
   }
 }
 
@@ -133,4 +155,12 @@ ol {
   body {
     margin-top: 60px;
   }
+}
+
+.red-border {
+  border: 1px solid #b90b00;
+}
+
+.align-left {
+  text-align: left;
 }
