@@ -3,7 +3,9 @@
     <img class="card-img-top img-fluid" src="{{ product.featured_image | img_url: "240x240" }}" alt="{{ product.title }}">
     <div class="card-body">
       <p class="card-text">{{ product.title }}</p>
-      <p class="card-text">From {{ product.price_min | money }}</p>
+      {% if product.price_min != 0 %}
+        <p class="card-text">From {{ product.price_min | money }}</p>
+      {% endif %}
     </div>
   </a>
 </div>

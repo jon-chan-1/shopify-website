@@ -1,79 +1,47 @@
 <div class="container">
-  <h2 class="homepage-header">Featured Brands</h2>
-    {%- for collection in collections -%}
-      {%- if collection.template_suffix == "brand" -%}
-        {%- capture count-%}{%- increment counter -%}{%- endcapture -%}
-        {%- capture index -%}{{- count | modulo: 8 -}}{%- endcapture -%}
-        {%- if index == "0" -%}
-          <div class="row">
-            <div class="col-2"></div>
-        {%- endif -%}
-            <div class="col-1 d-flex">
-              <a href="{{ collection.url }}" class="brand-link">
-                <img class="img-fluid brand-image" src="{{ collection.image | img_url: "master" }}" alt-text="{{ collection.title }} logo"/>
-              </a>
-            </div>
-        {%- if index == "7" -%}
-            <div class="col-2"></div>
+  <h2 class="product-line d-flex homepage-header mt-60">
+    Line Card
+    <div class="divider-line"></div>
+  </h2>
+  <div class="row mt-36">
+    {% for collection in collections %}
+      {% if collection.template_suffix == "brand" %}
+        <div class="col-sm-2 col-6 brand">
+          <div class="brand-hover-group">
+            <a href="{{ collection.url }}">
+              <div class="card red-border product">
+                <div class="brand-card-img-box">
+                  <img class="card-img-top img-fluid brand-image" src="{{ collection.image | img_url: "master" }}" alt="{{ collection.title | upcase }}">
+                </div>
+                <div class="card-body brand-title">
+                  {{ collection.title | upcase }}
+                </div>
+              </div>
+            </a>
           </div>
-        {%- endif -%}
-      {%- endif -%}
-      {%- if forloop.last == true and index != "7" -%}
-          <div class="col-2"></div>
         </div>
-      {%- endif -%}
-    {%- endfor -%}
-  <div class="row">
-    <div class="col-12">
-      <div class="product-line d-flex">Brands A-Z<div class="divider-line"></div>
-      </div>
-    </div>
+      {% endif %}
+    {% endfor %}
   </div>
-  <div class="row">
-    <div class="col-12">
-      <ul>
-        {%- for collection in collections -%}
-          {%- if collection.template_suffix == "brand" -%}
-            <li>
-              <a href="{{ collection.url }}">{{ collection.title }}</a>
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-    </div>
+  <h2 class="product-line d-flex homepage-header mt-60">
+    Brands A-Z
+    <div class="divider-line"></div>
+  </h2>
+  <div class="row mt-36">
+    <ul>
+      {%- for collection in collections -%}
+        {%- if collection.template_suffix == "brand" -%}
+          <li>
+            <a href="{{ collection.url }}">
+              {{ collection.title | upcase }}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
   </div>
 </div>
 
-
 <style>
-.product-line {
-  font-family: Muli;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 1.55;
-  letter-spacing: 1.9px;
-  color: #b90b00;
-  margin-top: 137px;
-}
 
-.divider-line {
-  margin-bottom: 0px;
-}
-
-.brand-tile > a > .brand-image {
-  width: 50%;
-}
-
-.brand-tile {
-  height: 220px;
-  display: flex;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #d8d8d8;
-}
-
-.brand-link {
-  text-align: center;
-  align-self: center;
-}
 </style>

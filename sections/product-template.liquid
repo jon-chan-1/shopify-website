@@ -123,7 +123,7 @@
 
             {% if inquiryOnly %}
               <a href="mailto:info@crownautony.com?subject=Request for pricing: {{ product.title }}&body=I am interested in {{ product.title }}. Please provide the pricing for this specific variant:%0Ahttps://crownspeedlab.com{{ variant.url }}">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" id="email-button" type="button">
                   Email For Pricing
                 </button>
               </a>
@@ -181,7 +181,6 @@
     </div>
   </div>
 </div>
-<div id="globo-recommendations"></div>
 {% schema %}
 {
   "name": "Product",
@@ -268,6 +267,10 @@
   margin-top: 74px;
 }
 
+#email-button {
+  margin-top: 30px;
+}
+
 @media (min-width: 769px) {
   #quantity {
     width: 40%;
@@ -275,6 +278,10 @@
 
   .btn--add-to-cart {
     width: 40%;
+  }
+
+  #email-button {
+    width: 40%
   }
 }
 
@@ -285,6 +292,10 @@
 
   .btn--add-to-cart {
     width: 100%;
+  }
+
+  #email-button {
+    width: 100%
   }
 }
 

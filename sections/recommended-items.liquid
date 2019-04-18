@@ -3,7 +3,7 @@
     <div class="col-sm-1">
       <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true">
-          <object class="rotate-180" data="{{ 'arrow-forward.svg' | asset_url }}" type="image/svg+xml"></object>
+          <i class="fas fa-chevron-left"></i>
         </span>
         <span class="sr-only">Previous</span>
       </a>
@@ -23,7 +23,7 @@
     <div class="col-sm-1">
       <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true">
-          <object data="{{ 'arrow-forward.svg' | asset_url }}" type="image/svg+xml"></object>
+          <i class="fas fa-chevron-right"></i>
         </span>
         <span class="sr-only">Next</span>
       </a>
@@ -95,6 +95,14 @@
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+.fa-chevron-left, .fa-chevron-right {
+  color: #d0021b;
+}
+
+.fa-chevron-left:hover, .fa-chevron-right:hover {
+  color: ##9c0013;
 }
 
 {% endstylesheet %}

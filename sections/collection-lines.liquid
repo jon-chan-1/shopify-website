@@ -467,13 +467,14 @@ function newMobileTile(id) {
 };
 
 function newCard(product) {
+  var hidePrice = product.price == "From $0.00" ? "hidden" : ""
   var card = `
     <div class="card product">
       <a href="` + product.url + `">
         <img class="card-img-top img-fluid product-grid" src="` + product.image_url + `" alt="Card image cap">
         <div class="card-body">
           <p class="card-text">` + product.title + `</p>
-          <p class="card-text">` + product.price + `</p>
+          <p class="card-text ` + hidePrice + `">` + product.price + `</p>
         </div>
       </a>
     </div>
