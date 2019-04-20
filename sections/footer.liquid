@@ -1,7 +1,7 @@
 <footer class="site-footer small--text-center" role="contentinfo">
   <div class="container-fluid background-gray">
     <div class="product-line d-flex"><div class="divider-line" id="footer-divider-line"></div></div>
-    <div class="row mt-60">
+    <div class="row mt-60 fix-width">
       <div class="col-sm-2"></div>
       <div class="col-sm-2">
         <ul class="footer-list">
@@ -46,7 +46,7 @@
       </div>
       <div class="col-sm-2"></div>
       <div class="col-sm-4">
-        <div class="row">
+        <div class="row fix-width">
           <div class-"col-12">
             <h4 id="our-location">
               <a href="https://crownspeedlab.com/pages/contact-us">Our Location</a>
@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        <div class="row social-media">
+        <div class="row social-media fix-width">
           <a href="https://www.facebook.com/Crownspeedlab/" target="_blank">
             <img src="{{ 'flogo-RGB-HEX-Blk-512.png' | asset_img_url: '48x48' }}" alt="flogo" id="flogo">
           </a>
@@ -198,5 +198,10 @@
 
 .background-gray {
   background-color: #434343;
+}
+
+.fix-width {
+  margin-right: 0px;
+  margin-left: 0px;
 }
 {% endstylesheet %}

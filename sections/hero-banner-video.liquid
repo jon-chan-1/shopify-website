@@ -1,0 +1,34 @@
+<div class="container-fluid super-hero d-none d-sm-block">
+  <iframe src="https://www.youtube.com/embed/{{ section.settings.youtube-video-id }}?autoplay=1&mute=1&disablekb=1&fs=0&loop=1&playsinline=1&playlist={{ section.settings.youtube-video-id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<div class="container-fluid super-hero d-sm-none">
+  <iframe src="https://www.youtube.com/embed/{{ section.settings.youtube-video-id }}?" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+{% schema %}
+
+{
+  "name": "Hero Banner Video",
+  "class": "hero-banner-video-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "youtube-video-id",
+      "label": "Youtube video ID",
+      "info": "ex. Ya9KtO3cBSc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner Video",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

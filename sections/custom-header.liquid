@@ -17,6 +17,11 @@
       {% for block in section.blocks %}
         {% if block.type == "collection" %}
           {% assign parent_collection = collections[block.settings.parent-collection] %}
+
+          {% if parent_collection.all_products_count == 0 %}
+            {% continue %}
+          {% endif %}
+
           {% assign sub_collection_1 = collections[block.settings.sub-collection-1] %}
           {% assign sub_collection_2 = collections[block.settings.sub-collection-2] %}
           {% assign sub_collection_3 = collections[block.settings.sub-collection-3] %}
@@ -31,34 +36,54 @@
             {{ parent_collection.title | upcase }}
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               {% if sub_collection_1.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
+                {% if sub_collection_1.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_2.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_2.url }}">{{ sub_collection_2.title | upcase }}</a>
+                {% if sub_collection_2.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_2.url }}">{{ sub_collection_2.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_3.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_3.url }}">{{ sub_collection_3.title | upcase }}</a>
+                {% if sub_collection_3.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_3.url }}">{{ sub_collection_3.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_4.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_4.url }}">{{ sub_collection_4.title | upcase }}</a>
+                {% if sub_collection_4.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_4.url }}">{{ sub_collection_4.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_5.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_5.url }}">{{ sub_collection_5.title | upcase }}</a>
+                {% if sub_collection_5.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_5.url }}">{{ sub_collection_5.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_6.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_6.url }}">{{ sub_collection_6.title | upcase }}</a>
+                {% if sub_collection_6.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_6.url }}">{{ sub_collection_6.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_7.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_7.url }}">{{ sub_collection_7.title | upcase }}</a>
+                {% if sub_collection_7.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_7.url }}">{{ sub_collection_7.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_8.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_8.url }}">{{ sub_collection_8.title | upcase }}</a>
+                {% if sub_collection_8.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_8.url }}">{{ sub_collection_8.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_9.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_9.url }}">{{ sub_collection_9.title | upcase }}</a>
+                {% if sub_collection_9.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_9.url }}">{{ sub_collection_9.title | upcase }}</a>
+                {% endif %}
               {% endif %}
               {% if sub_collection_10.id != "" %}
-                <a class="dropdown-item custom-nav-link" href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
+                {% if sub_collection_10.all_products_count > 0 %}
+                  <a class="dropdown-item custom-nav-link" href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
+                {% endif %}
               {% endif %}
                 <a class="dropdown-item custom-nav-link" href="{{ parent_collection.url }}">SEE ALL</a>
             </div>
@@ -104,6 +129,11 @@
       {% for block in section.blocks %}
         {% if block.type == "collection" %}
           {% assign parent_collection = collections[block.settings.parent-collection] %}
+
+          {% if parent_collection.all_products_count == 0 %}
+            {% continue %}
+          {% endif %}
+
           {% assign sub_collection_1 = collections[block.settings.sub-collection-1] %}
           {% assign sub_collection_2 = collections[block.settings.sub-collection-2] %}
           {% assign sub_collection_3 = collections[block.settings.sub-collection-3] %}
@@ -126,54 +156,74 @@
             <div class="collapse navbar-collapse" id="collection-{{ forloop.index0 }}">
               <ul class="navbar-nav">
                 {% if sub_collection_1.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_1.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_1.url }}">{{ sub_collection_1.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_2.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_2.url }}">{{ sub_collection_2.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_2.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_2.url }}">{{ sub_collection_2.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_3.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_3.url }}">{{ sub_collection_3.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_3.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_3.url }}">{{ sub_collection_3.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_4.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_4.url }}">{{ sub_collection_4.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_4.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_4.url }}">{{ sub_collection_4.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_5.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_5.url }}">{{ sub_collection_5.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_5.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_5.url }}">{{ sub_collection_5.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_6.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_6.url }}">{{ sub_collection_6.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_6.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_6.url }}">{{ sub_collection_6.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_7.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_7.url }}">{{ sub_collection_7.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_7.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_7.url }}">{{ sub_collection_7.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_8.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_8.url }}">{{ sub_collection_8.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_8.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_8.url }}">{{ sub_collection_8.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_9.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_9.url }}">{{ sub_collection_9.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_9.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_9.url }}">{{ sub_collection_9.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                 {% if sub_collection_10.id != "" %}
-                  <li class="nav-item custom-nav-link mobile-nav-link">
-                    <a href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
-                  </li>
+                  {% if sub_collection_10.all_products_count > 0 %}
+                    <li class="nav-item custom-nav-link mobile-nav-link">
+                      <a href="{{ sub_collection_10.url }}">{{ sub_collection_10.title | upcase }}</a>
+                    </li>
+                  {% endif %}
                 {% endif %}
                   <li class="nav-item custom-nav-link mobile-nav-link">
                     <a href="{{ parent_collection.url }}">SEE ALL</a>
